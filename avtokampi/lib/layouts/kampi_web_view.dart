@@ -7,7 +7,7 @@ class KampiWeb extends StatefulWidget {
 }
 
 class _KampiWebState extends State<KampiWeb> {
-    String url = 'https://camping-web.azurewebsites.net';
+    String url = 'https://camping-web.web.app';
     int _currentIndex = 0;
 
     @override
@@ -45,7 +45,7 @@ class _KampiWebState extends State<KampiWeb> {
     String _getUrl(int val) {
         switch (val) {
             case 0:
-                return 'https://camping-web.azurewebsites.net';
+                return 'https://camping-web.web.app';
             case 1:
                 return 'https://camping-api.azurewebsites.net';
             default:
