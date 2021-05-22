@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/avtokampi_map.dart';
+import 'package:avtokampi/layouts/camps_map.dart';
 import 'package:avtokampi/layouts/calendar_popup_view.dart';
-import 'package:avtokampi/layouts/hotel_list_data.dart';
-import 'package:avtokampi/layouts/hotel_list_view.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
+import 'package:avtokampi/layouts/camp_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 
 import 'filters_screen.dart';
-import 'hotel_app_theme.dart';
+import 'camp_list_app_theme.dart';
 
 class HotelHomeScreen extends StatefulWidget {
     @override
@@ -21,7 +21,7 @@ class HotelHomeScreen extends StatefulWidget {
 class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
     AnimationController animationController;
-    List<HotelListData> hotelList = [];
+    List<CampListData> campList = [];
     final ScrollController _scrollController = ScrollController();
     String filter = "";
 
@@ -33,7 +33,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         animationController = AnimationController(
             duration: const Duration(milliseconds: 1000), vsync: this);
         super.initState();
-        hotelList = HotelListData.getKampiList();
+        campList = CampListData.getKampiList();
     }
 
     Future<bool> getData() async {
@@ -173,7 +173,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                         .buildLightTheme()
                                                         .backgroundColor,
                                                     child: ListView.builder(
-                                                        itemCount: hotelList
+                                                        itemCount: campList
                                                             .length,
                                                         padding: const EdgeInsets
                                                             .only(top: 8),
@@ -183,10 +183,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                             BuildContext context,
                                                             int index) {
                                                             final int count =
-                                                            hotelList.length >
+                                                            campList.length >
                                                                 10
                                                                 ? 10
-                                                                : hotelList
+                                                                : campList
                                                                 .length;
                                                             final Animation<
                                                                 double> animation =
@@ -210,17 +210,17 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                                 filter == ""
                                                                 ? HotelListView(
                                                                 callback: () {},
-                                                                hotelData: hotelList[index],
+                                                                hotelData: campList[index],
                                                                 animation: animation,
                                                                 animationController: animationController,
                                                             )
-                                                                : hotelList[index]
+                                                                : campList[index]
                                                                 .titleTxt
                                                                 .contains(
                                                                 filter)
                                                                 ? HotelListView(
                                                                 callback: () {},
-                                                                hotelData: hotelList[index],
+                                                                hotelData: campList[index],
                                                                 animation: animation,
                                                                 animationController: animationController,
                                                             )
@@ -268,14 +268,14 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                     return const SizedBox();
                                 } else {
                                     return ListView.builder(
-                                        itemCount: hotelList.length,
+                                        itemCount: campList.length,
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (BuildContext context,
                                             int index) {
                                             final int count =
-                                            hotelList.length > 10
+                                            campList.length > 10
                                                 ? 10
-                                                : hotelList.length;
+                                                : campList.length;
                                             final Animation<double> animation =
                                             Tween<double>(begin: 0.0, end: 1.0)
                                                 .animate(
@@ -290,7 +290,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
                                             return HotelListView(
                                                 callback: () {},
-                                                hotelData: hotelList[index],
+                                                hotelData: campList[index],
                                                 animation: animation,
                                                 animationController: animationController,
                                             );
@@ -307,8 +307,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
     Widget getHotelViewList() {
         final List<Widget> hotelListViews = <Widget>[];
-        for (int i = 0; i < hotelList.length; i++) {
-            final int count = hotelList.length;
+        for (int i = 0; i < campList.length; i++) {
+            final int count = campList.length;
             final Animation<double> animation =
             Tween<double>(begin: 0.0, end: 1.0).animate(
                 CurvedAnimation(
@@ -320,7 +320,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
             hotelListViews.add(
                 HotelListView(
                     callback: () {},
-                    hotelData: hotelList[i],
+                    hotelData: campList[i],
                     animation: animation,
                     animationController: animationController,
                 ),
@@ -602,7 +602,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                     child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                            'Najdenih kampov: ${hotelList
+                                            'Najdenih kampov: ${campList
                                                 .length}',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w100,

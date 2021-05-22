@@ -2,20 +2,20 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/avtokamp_map.dart';
-import 'package:avtokampi/layouts/hotel_list_data.dart';
+import 'package:avtokampi/layouts/camp_map.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
 import 'package:avtokampi/models/Slika.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 
-import 'design_course_app_theme.dart';
+import 'app_theme.dart';
 import 'home_design_course.dart';
 
 class CourseInfoScreen extends StatefulWidget {
 
-    HotelListData avtokampElement;
+    CampListData avtokampElement;
     Avtokamp avtokamp;
 
     CourseInfoScreen(this.avtokampElement, this.avtokamp);
@@ -35,7 +35,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     double opacity2 = 0.0;
     double opacity3 = 0.0;
 
-    HotelListData avtokampElement;
+    CampListData avtokampElement;
     Avtokamp avtokamp;
     List<Uint8List> slike = [];
     Image slika;
@@ -55,7 +55,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         return stMest;
     }
 
-    Future<void> _ackAlert2(BuildContext context, HotelListData kamp) {
+    Future<void> _ackAlert2(BuildContext context, CampListData kamp) {
         if (globals.priljubljeniKampi.contains(kamp.titleTxt)) {
             return showDialog(
                 context: context,
@@ -499,7 +499,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                                                                             BuildContext context) =>
                                                                                             DesignCourseHomeScreen(
                                                                                                 avtokamp: avtokamp,
-                                                                                                hotelListData: avtokampElement,),
+                                                                                                campListData: avtokampElement,),
                                                                                     ),
                                                                                 );
                                                                             },),

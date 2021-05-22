@@ -1,7 +1,7 @@
 import 'package:avtokampi/controllers/api_controller.dart';
 import 'package:avtokampi/globals.dart' as globals;
 import 'package:avtokampi/layouts/lastniki_kampov_list_kampirna_mesta.dart';
-import 'package:avtokampi/layouts/spremeni_kamp_forma.dart';
+import 'package:avtokampi/layouts/modify_camp_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -38,10 +38,10 @@ class _LastnikiKampovList extends State<LastnikiKampovList> {
         return Colors.red;
     }
 
-    deleteKamp(BuildContext context, int kampId) {
+    deleteKamp(BuildContext context, int kampId) async {
         ApiController apiController = new ApiController();
         Response response;
-        apiController.deleteAvtokamp(kampId).then((apiResponse) {
+        await apiController.deleteAvtokamp(kampId).then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 204) {

@@ -1,23 +1,23 @@
-import 'package:avtokampi/layouts/category_kampirno_mesto.dart';
+import 'package:avtokampi/layouts/category_camping_space.dart';
 import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
-import 'package:avtokampi/layouts/design_course_app_theme.dart';
-import 'package:avtokampi/layouts/hotel_list_data.dart';
+import 'package:avtokampi/layouts/app_theme.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:flutter/material.dart';
 
 class PopularCourseListView extends StatefulWidget {
     const PopularCourseListView(
-        {Key key, this.callBack, this.avtokamp, this.hotelListData})
+        {Key key, this.callBack, this.avtokamp, this.campListData})
         : super(key: key);
 
     final Function callBack;
     final Avtokamp avtokamp;
-    final HotelListData hotelListData;
+    final CampListData campListData;
 
     @override
     _PopularCourseListViewState createState() =>
-        _PopularCourseListViewState(avtokamp, hotelListData);
+        _PopularCourseListViewState(avtokamp, campListData);
 }
 
 class _PopularCourseListViewState extends State<PopularCourseListView>
@@ -25,17 +25,17 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
     AnimationController animationController;
     List<Category> popularCourseList;
     Avtokamp avtokamp;
-    HotelListData hotelListData;
+    CampListData campListData;
 
 
-    _PopularCourseListViewState(this.avtokamp, this.hotelListData);
+    _PopularCourseListViewState(this.avtokamp, this.campListData);
 
     @override
     void initState() {
         animationController = AnimationController(
             duration: const Duration(milliseconds: 2000), vsync: this);
         super.initState();
-        popularCourseList = Category.getPopularniKampi(avtokamp, hotelListData);
+        popularCourseList = Category.getPopularniKampi(avtokamp, campListData);
     }
 
     Future<bool> getData() async {
@@ -81,8 +81,8 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                                         animationController: animationController,
                                         avtokamp: popularCourseList[index]
                                             .avtokamp,
-                                        hotelListData: popularCourseList[index]
-                                            .hotelListData,
+                                        campListData: popularCourseList[index]
+                                            .campListData,
                                     );
                                 },
                             ),
@@ -105,7 +105,7 @@ class CategoryView extends StatelessWidget {
         this.category,
         this.animationController,
         this.animation,
-        this.callback, this.avtokamp, this.hotelListData})
+        this.callback, this.avtokamp, this.campListData})
         : super(key: key);
 
     final VoidCallback callback;
@@ -113,7 +113,7 @@ class CategoryView extends StatelessWidget {
     final AnimationController animationController;
     final Animation<dynamic> animation;
     final Avtokamp avtokamp;
-    final HotelListData hotelListData;
+    final CampListData campListData;
 
     @override
     Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class CategoryView extends StatelessWidget {
                                     MaterialPageRoute<dynamic>(
                                         builder: (BuildContext context) =>
                                             CourseInfoScreen(
-                                                hotelListData, avtokamp)));
+                                                campListData, avtokamp)));
                             },
                             child: SizedBox(
                                 height: 280,

@@ -1,7 +1,7 @@
 import 'package:avtokampi/main.dart';
 import 'package:flutter/material.dart';
 
-import '../layouts/fintness_app_theme.dart';
+import '../layouts/profile_theme.dart';
 
 class GlassView extends StatelessWidget {
     final AnimationController animationController;

@@ -21,10 +21,10 @@ class LoginScreen extends StatelessWidget {
     Duration get loginTime => Duration(milliseconds: 2250);
     ApiController apiController;
 
-    Future<String> _onLogin(LoginData data) {
+    Future<String> _onLogin(LoginData data) async {
         print('Name: ${data.name}, Password: ${data.password}');
         Response response;
-        apiController.login(data.name, data.password).then((apiResponse) {
+        await apiController.login(data.name, data.password).then((apiResponse) {
             response = apiResponse;
             print(response.body);
         });
@@ -40,10 +40,10 @@ class LoginScreen extends StatelessWidget {
         });
     }
 
-    Future<String> _onRegister(LoginData data) {
+    Future<String> _onRegister(LoginData data) async {
         print('Name: ${data.name}, Password: ${data.password}');
         Response response;
-        apiController.register(data.name, data.name, data.name, data.password)
+        await apiController.register(data.name, data.name, data.name, data.password)
             .then((apiResponse) {
             response = apiResponse;
             print(response.statusCode);

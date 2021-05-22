@@ -25,9 +25,9 @@ import 'api_controller.dart';
 class ApiDataGetter {
     ApiController apiController = new ApiController();
 
-    getAvtokampi() {
+    getAvtokampi() async {
         Response response;
-        apiController.getAvtokampi().then((apiResponse) {
+        await apiController.getAvtokampi().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -44,10 +44,10 @@ class ApiDataGetter {
         });
     }
 
-    getCeniki() {
+    getCeniki() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            apiController.getCenikiForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getCenikiForKamp(avtokamp.id).then((apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -65,9 +65,9 @@ class ApiDataGetter {
         }
     }
 
-    getDrzave() {
+    getDrzave() async {
         Response response;
-        apiController.getDrzave().then((apiResponse) {
+        await apiController.getDrzave().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -79,10 +79,10 @@ class ApiDataGetter {
         });
     }
 
-    getKampirnaMesta() {
+    getKampirnaMesta() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            apiController.getKampirnaMestaForKamp(avtokamp.id).then((
+            await apiController.getKampirnaMestaForKamp(avtokamp.id).then((
                 apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
@@ -102,9 +102,9 @@ class ApiDataGetter {
         }
     }
 
-    getKategorije() {
+    getKategorije() async {
         Response response;
-        apiController.getKategorije().then((apiResponse) {
+        await apiController.getKategorije().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -116,9 +116,9 @@ class ApiDataGetter {
         });
     }
 
-    getKategorijeStoritev() {
+    getKategorijeStoritev() async {
         Response response;
-        apiController.getKategorije().then((apiResponse) {
+        await apiController.getKategorije().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -132,10 +132,10 @@ class ApiDataGetter {
         });
     }
 
-    getMnenja() {
+    getMnenja() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            apiController.getMnenjaForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getMnenjaForKamp(avtokamp.id).then((apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -153,9 +153,9 @@ class ApiDataGetter {
         }
     }
 
-    getRegije() {
+    getRegije() async {
         Response response;
-        apiController.getRegije().then((apiResponse) {
+        await apiController.getRegije().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -167,9 +167,9 @@ class ApiDataGetter {
         });
     }
 
-    getRezervacije() {
+    getRezervacije() async {
         Response response;
-        apiController.getRezervacijeForUser().then((apiResponse) {
+        await apiController.getRezervacijeForUser().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -181,10 +181,10 @@ class ApiDataGetter {
         });
     }
 
-    getSlike() {
+    getSlike() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            apiController.getSlikeForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getSlikeForKamp(avtokamp.id).then((apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -202,9 +202,9 @@ class ApiDataGetter {
         }
     }
 
-    getStatusiRezervacij() {
+    getStatusiRezervacij() async {
         Response response;
-        apiController.getRegije().then((apiResponse) {
+        await apiController.getRegije().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -218,9 +218,9 @@ class ApiDataGetter {
         });
     }
 
-    getStoritve() {
+    getStoritve() async {
         Response response;
-        apiController.getStoritve().then((apiResponse) {
+        await apiController.getStoritve().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -232,10 +232,10 @@ class ApiDataGetter {
         });
     }
 
-    getStoritveKampa() {
+    getStoritveKampa() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            apiController.getStoritveForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getStoritveForKamp(avtokamp.id).then((apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -253,10 +253,10 @@ class ApiDataGetter {
         }
     }
 
-    getStoritveKampirnihMest() {
+    getStoritveKampirnihMest() async {
         for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
             Response response;
-            apiController.getStoritveForKampirnoMesto(kampirnoMesto.id).then((
+            await apiController.getStoritveForKampirnoMesto(kampirnoMesto.id).then((
                 apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
@@ -277,9 +277,9 @@ class ApiDataGetter {
         }
     }
 
-    getVrsteKampiranj() {
+    getVrsteKampiranj() async {
         Response response;
-        apiController.getVrsteKampiranj().then((apiResponse) {
+        await apiController.getVrsteKampiranj().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -291,9 +291,9 @@ class ApiDataGetter {
         });
     }
 
-    getPodatkiZaUporabnika() {
+    getPodatkiZaUporabnika() async {
         Response response;
-        apiController.getUserData().then((apiResponse) {
+        await apiController.getUserData().then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 200) {
@@ -340,7 +340,7 @@ class ApiDataGetter {
         }
     }
 
-    static loadData(context) {
+    static loadData(context) async {
         ProgressDialog pr = new ProgressDialog(
             context, type: ProgressDialogType.Normal,
             isDismissible: false,
@@ -365,7 +365,7 @@ class ApiDataGetter {
         );
         pr.show();
         ApiDataGetter apiDataGetter = new ApiDataGetter();
-        apiDataGetter.setGlobals();
+        await apiDataGetter.setGlobals();
         pr.update(
             message: "Potrpite malo! Podatki so skoraj že pridobljeni.",
             progressWidget: Container(

@@ -1,8 +1,8 @@
-import 'package:avtokampi/layouts/rezervacija_forma.dart';
+import 'package:avtokampi/layouts/camp_reservation_form.dart';
 import 'package:avtokampi/main.dart';
 import 'package:flutter/material.dart';
 
-import '../layouts/fintness_app_theme.dart';
+import '../layouts/profile_theme.dart';
 
 class WorkoutView extends StatelessWidget {
     final AnimationController animationController;

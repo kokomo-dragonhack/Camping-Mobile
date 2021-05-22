@@ -1,6 +1,6 @@
 import 'package:avtokampi/controllers/api_controller.dart';
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/spremeni_kampirno_mesto_forma.dart';
+import 'package:avtokampi/layouts/modify_camp_space_form.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:http/http.dart';
 
-import 'dodaj_kampirno_mesto_forma.dart';
+import 'add_camp_space_form.dart';
 
 void main() => runApp(MyApp());
 

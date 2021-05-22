@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'hotel_app_theme.dart';
-import 'popular_filter_list.dart';
+import 'camp_list_app_theme.dart';
+import 'popular_camps_filter_list.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
 

@@ -1,10 +1,10 @@
 import 'package:avtokampi/layouts/tabIcon_data.dart';
-import 'package:avtokampi/layouts/training_screen.dart';
+import 'package:avtokampi/layouts/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../layouts/fintness_app_theme.dart';
+import '../layouts/profile_theme.dart';
 import 'bottom_bar_view.dart';
-import 'my_diary_screen.dart';
+import 'camp_stats_screen.dart';
 
 class FitnessAppHomeScreen extends StatefulWidget {
     @override

@@ -1,37 +1,37 @@
 import 'package:avtokampi/globals.dart' as globals;
 import 'package:avtokampi/layouts/category_list_view.dart';
-import 'package:avtokampi/layouts/course_info_screen.dart';
-import 'package:avtokampi/layouts/hotel_list_data.dart';
+import 'package:avtokampi/layouts/camp_space_info_screen.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/layouts/popular_course_list_view.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:flutter/material.dart';
 
-import '../layouts/design_course_app_theme.dart';
+import '../layouts/app_theme.dart';
 
 class DesignCourseHomeScreen extends StatefulWidget {
     final Avtokamp avtokamp;
-    final HotelListData hotelListData;
+    final CampListData campListData;
     final int kategorija = 1;
 
-    const DesignCourseHomeScreen({Key key, this.avtokamp, this.hotelListData})
+    const DesignCourseHomeScreen({Key key, this.avtokamp, this.campListData})
         : super(key: key);
 
     @override
     _DesignCourseHomeScreenState createState() =>
         _DesignCourseHomeScreenState(
-            CategoryType.osnovna, avtokamp, hotelListData, kategorija);
+            CategoryType.osnovna, avtokamp, campListData, kategorija);
 }
 
 class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     CategoryType categoryType;
     int category;
     Avtokamp kamp;
-    HotelListData hotelListData;
+    CampListData campListData;
 
 
     _DesignCourseHomeScreenState(this.categoryType, this.kamp,
-        this.hotelListData, this.category);
+        this.campListData, this.category);
 
     @override
     Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                         moveTo();
                     },
                     avtokamp: kamp,
-                    hotelListData: hotelListData,
+                    campListData: campListData,
                     kategorija: category,
                 ),
             ],
@@ -154,7 +154,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                                 moveTo();
                             },
                             avtokamp: kamp,
-                            hotelListData: hotelListData,
+                            campListData: campListData,
                         ),
                     )
                 ],

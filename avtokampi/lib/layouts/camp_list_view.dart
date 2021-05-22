@@ -1,13 +1,13 @@
 import 'package:avtokampi/globals.dart' as globals;
 import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
-import 'package:avtokampi/layouts/hotel_app_theme.dart';
+import 'package:avtokampi/layouts/camp_list_app_theme.dart';
 import 'package:avtokampi/models/Mnenje.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
-import 'hotel_list_data.dart';
+import 'camp_list_data.dart';
 
 class HotelListView extends StatelessWidget {
     const HotelListView({Key key,
@@ -18,11 +18,11 @@ class HotelListView extends StatelessWidget {
         : super(key: key);
 
     final VoidCallback callback;
-    final HotelListData hotelData;
+    final CampListData hotelData;
     final AnimationController animationController;
     final Animation<dynamic> animation;
 
-    Future<void> _ackAlert(BuildContext context, HotelListData kamp) {
+    Future<void> _ackAlert(BuildContext context, CampListData kamp) {
         if (globals.priljubljeniKampi.contains(kamp.titleTxt)) {
             return showDialog<void>(
                 context: context,
@@ -62,7 +62,7 @@ class HotelListView extends StatelessWidget {
         );
     }
 
-    Future<void> _ackAlert2(BuildContext context, HotelListData kamp) {
+    Future<void> _ackAlert2(BuildContext context, CampListData kamp) {
         if (globals.priljubljeniKampi.contains(kamp.titleTxt)) {
             return showDialog(
                 context: context,
@@ -129,7 +129,7 @@ class HotelListView extends StatelessWidget {
                 ));
     }
 
-    Future<void> showMnenja(BuildContext context, HotelListData kamp) {
+    Future<void> showMnenja(BuildContext context, CampListData kamp) {
         String mnenjaTekst = "";
         if (kamp.mnenja.isNotEmpty) {
             int stMnenj = 0;

@@ -83,10 +83,10 @@ class _ReservationFormState extends State<ReservationForm> {
         return kampirnaMesta;
     }
 
-    addRezervacija() {
+    addRezervacija() async {
         ApiController apiController = new ApiController();
         Response response;
-        apiController.addCampReservation(
+        await apiController.addCampReservation(
             trenutniUporabnik, izbraniKamp.id, izbranoKampirnoMesto.id,
             izbranaVrstaKampiranja.id, izbraniDatumOd, izbraniDatumDo).then((
             apiResponse) {

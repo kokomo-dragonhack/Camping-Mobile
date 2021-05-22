@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:avtokampi/layouts/fintness_app_theme.dart';
-import 'package:avtokampi/layouts/kampi_mnenja_list.dart';
+import 'package:avtokampi/layouts/profile_theme.dart';
+import 'package:avtokampi/layouts/opinions_list.dart';
 import 'package:avtokampi/layouts/tabIcon_data.dart';
 import 'package:avtokampi/main.dart';
 import 'package:flutter/material.dart';

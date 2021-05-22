@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/hotel_list_data.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/Cenik.dart';
 import 'package:avtokampi/models/Drzava.dart';
@@ -20,7 +20,7 @@ class Category {
         this.money = 0,
         this.rating = 0.0,
         this.kampirnoMesto,
-        this.hotelListData,
+        this.campListData,
         this.avtokamp,
         this.blobSlika
     });
@@ -72,13 +72,13 @@ class Category {
     }
 
     static List<Category> getKampirnaMestaForKamp(Avtokamp avtokamp,
-        HotelListData hotelListData, int kategorija) {
+        CampListData campListData, int kategorija) {
         List<Category> kampirnaMestaList = new List<Category>();
         if (globals.kampirnaMesta.isNotEmpty) {
             for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
                 if (kampirnoMesto.avtokamp == avtokamp.id &&
                     kampirnoMesto.kategorija == kategorija) {
-                    int cena = hotelListData.perNight;
+                    int cena = campListData.perNight;
                     if (kategorija == 2) {
                         cena += 20;
                     }
@@ -91,9 +91,9 @@ class Category {
                         title: kampirnoMesto.naziv,
                         lessonCount: kampirnoMesto.velikost,
                         money: cena,
-                        rating: hotelListData.rating,
+                        rating: campListData.rating,
                         kampirnoMesto: kampirnoMesto,
-                        hotelListData: hotelListData,
+                        campListData: campListData,
                         avtokamp: avtokamp
                     ),);
                 }
@@ -105,7 +105,7 @@ class Category {
     }
 
     static List<Category> getPopularniKampi(Avtokamp avtokamp,
-        HotelListData hotelListData) {
+        CampListData campListData) {
         List<Category> ostaliKampi = new List<Category>();
         if (globals.avtokampi.isNotEmpty) {
             for (Avtokamp a in globals.avtokampi) {
@@ -124,10 +124,10 @@ class Category {
                         blobSlika: imageKampPath,
                         title: a.naziv,
                         lessonCount: a.nazivLokacije,
-                        money: hotelListData.perNight,
-                        rating: hotelListData.rating,
+                        money: campListData.perNight,
+                        rating: campListData.rating,
                         avtokamp: a,
-                        hotelListData: HotelListData(
+                        campListData: CampListData(
                             imagePath: imageKampPath,
                             titleTxt: a.naziv,
                             subTxt: a.nazivLokacije,
@@ -153,7 +153,7 @@ class Category {
     double rating;
     String imagePath;
     KampirnoMesto kampirnoMesto;
-    HotelListData hotelListData;
+    CampListData campListData;
     Avtokamp avtokamp;
     Uint8List blobSlika;
 

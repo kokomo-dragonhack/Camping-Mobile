@@ -1,11 +1,13 @@
 import 'package:avtokampi/controllers/api_controller.dart';
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
-import 'package:avtokampi/models/Kategorija.dart';
+import 'package:avtokampi/models/Rezervacija.dart';
+import 'package:avtokampi/models/Storitev.dart';
+import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:http/http.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -17,77 +19,77 @@ class MyApp extends StatelessWidget {
             theme: new ThemeData(
                 primarySwatch: Colors.blue,
             ),
-            home: new SpremeniKampirnoMestoForm(),
+            home: new StoritveForm(),
         );
     }
 }
 
-class SpremeniKampirnoMestoForm extends StatefulWidget {
-    SpremeniKampirnoMestoForm({Key key, this.kampirnoMesto, this.kamp})
-        : super(key: key);
-
-    final KampirnoMesto kampirnoMesto;
-    final Avtokamp kamp;
+class StoritveForm extends StatefulWidget {
+    StoritveForm({Key key}) : super(key: key);
 
     @override
-    _SpremeniKampirnoMestoFormState createState() =>
-        new _SpremeniKampirnoMestoFormState(kampirnoMesto, kamp);
+    _StoritveFormState createState() => new _StoritveFormState();
 }
 
-class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
+class _StoritveFormState extends State<StoritveForm> {
     final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
-    KampirnoMesto kampirnoMesto;
-    Avtokamp izbraniKamp;
+    KampirnoMesto izbranoKampirnoMesto = getRezerviranaKampirnaMestaZaUporabnikaStaticna()[0];
+    Storitev izbranaStoritev = globals.storitve[0];
 
-    _SpremeniKampirnoMestoFormState(this.kampirnoMesto, this.izbraniKamp);
-
-    int trenutniUporabnik = globals.currentUser.id;
-    Kategorija izbranaKategorija = globals.kategorije[0];
-    TextEditingController nazivKampirnegaMestaKontroler = TextEditingController();
-    TextEditingController velikostKampirnegaMestaKontroler =
-    TextEditingController();
-
-    @override
-    void initState() {
-        super.initState();
-        izbranaKategorija = getKategorijaById(kampirnoMesto.kategorija);
-        nazivKampirnegaMestaKontroler =
-            TextEditingController(text: kampirnoMesto.naziv);
-        velikostKampirnegaMestaKontroler =
-            TextEditingController(text: kampirnoMesto.velikost);
+    List<KampirnoMesto> getRezerviranaKampirnaMestaZaUporabnika() {
+        List<KampirnoMesto> kampirnaMesta = [];
+        for (Rezervacija r in globals.rezervacije) {
+            if (r.uporabnik == globals.currentUser.id) {
+                kampirnaMesta.add(getKampirnoMestoById(r.kampirnoMesto));
+            }
+        }
+        return kampirnaMesta;
     }
 
-    Kategorija getKategorijaById(int idKategorije) {
-        for (Kategorija kategorija in globals.kategorije) {
-            if (kategorija.id == idKategorije) {
-                return kategorija;
+    KampirnoMesto getKampirnoMestoById(int kampirnoMestoId) {
+        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
+            if (kampirnoMesto.id == kampirnoMestoId) {
+                return kampirnoMesto;
             }
         }
     }
 
-    modifyKampirnoMesto() {
+    static KampirnoMesto getKampirnoMestoByIdStaticna(int kampirnoMestoId) {
+        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
+            if (kampirnoMesto.id == kampirnoMestoId) {
+                return kampirnoMesto;
+            }
+        }
+    }
+
+    static List<
+        KampirnoMesto> getRezerviranaKampirnaMestaZaUporabnikaStaticna() {
+        List<KampirnoMesto> kampirnaMesta = [];
+        for (Rezervacija r in globals.rezervacije) {
+            if (r.uporabnik == globals.currentUser.id) {
+                kampirnaMesta.add(
+                    getKampirnoMestoByIdStaticna(r.kampirnoMesto));
+            }
+        }
+        return kampirnaMesta;
+    }
+
+    addPrijavaNaStoritev() async {
         ApiController apiController = new ApiController();
         Response response;
-        apiController.modifyKampirnoMesto(
-            kampirnoMesto.id,
-            nazivKampirnegaMestaKontroler.text,
-            velikostKampirnegaMestaKontroler.text,
-            izbraniKamp.id,
-            izbranaKategorija.id).then((apiResponse) {
+        await apiController.addPrijavaNaStoritev(
+            izbranoKampirnoMesto.id, izbranaStoritev.id).then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 201) {
-                globals.kampirnaMesta.remove(kampirnoMesto);
-                globals.kampirnaMesta.add(new KampirnoMesto.novo(
-                    nazivKampirnegaMestaKontroler.text,
-                    velikostKampirnegaMestaKontroler.text,
-                    izbraniKamp.id,
-                    izbranaKategorija.id));
-                print("Kampirno mesto je bilo uspešno spremenjeno!");
+                globals.storitveKampirnihMest.add(
+                    new StoritevKampirnegaMesta.nova(
+                        izbranoKampirnoMesto.id, izbranaStoritev.id));
+                print("Storitev je bila uspešno dodana!");
                 _ackAlert();
             } else {
-                print("Kampirno mesto ni bilo uspešno spremenjeno!");
+                print("Storitev ni bila uspešno dodana!");
                 _ackAlert2();
             }
         });
@@ -107,13 +109,13 @@ class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'SPREMEMBE',
+                        'STORITEV',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Kampirno mesto je bilo uspešno spremenjeno!',
+                        'Storitev je bila uspešno dodana!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -139,13 +141,13 @@ class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'SPREMEMBE',
+                        'STORITEV',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Kampirno mesto žal ni bilo uspešno spremenjeno!',
+                        'Storitev žal ni bila uspešno dodana!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -161,7 +163,7 @@ class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
     Widget build(BuildContext context) {
         return new Scaffold(
             appBar: new AppBar(
-                title: new Text("SPREMEMBA KAMPIRNEGA MESTA"),
+                title: new Text("PRIJAVA NA STORITEV"),
             ),
             body: new SafeArea(
                 top: false,
@@ -170,54 +172,68 @@ class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
                     key: _formKey,
                     autovalidate: true,
                     child: new ListView(
-                        padding:
-                        const EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 5),
                         children: <Widget>[
                             new Text(""),
                             new Text(
-                                "Vpišite podatke za spremenjeno kampirno mesto: ",
+                                "Izberite storitev in ostale podatke: ",
                                 textAlign: TextAlign.center),
                             new Text(""),
-                            new TextFormField(
-                                controller: nazivKampirnegaMestaKontroler,
-                                decoration: const InputDecoration(
-                                    icon: const Icon(Icons.text_fields),
-                                    hintText: 'Naziv kampirnega mesta',
-                                    labelText: 'Naziv kampirnega mesta',
-                                ),
-                            ),
-                            new Text(""),
-                            new TextFormField(
-                                controller: velikostKampirnegaMestaKontroler,
-                                decoration: const InputDecoration(
-                                    icon: const Icon(Icons.message),
-                                    hintText: 'Velikost kampirnega mesta',
-                                    labelText: 'Velikost kampirnega mesta',
-                                ),
-                            ),
                             new FormField(
                                 builder: (FormFieldState state) {
                                     return InputDecorator(
                                         decoration: InputDecoration(
                                             icon: const Icon(Icons.place),
-                                            labelText: 'Izberi kategorijo',
+                                            labelText: 'Izberi kampirno mesto',
                                         ),
                                         child: new DropdownButtonHideUnderline(
                                             child: new DropdownButton(
-                                                value: izbranaKategorija,
+                                                value: izbranoKampirnoMesto,
                                                 isDense: true,
                                                 onChanged: (
-                                                    Kategorija newValue) {
+                                                    KampirnoMesto newValue) {
                                                     setState(() {
-                                                        izbranaKategorija =
+                                                        izbranoKampirnoMesto =
                                                             newValue;
                                                         state.didChange(
                                                             newValue);
                                                     });
                                                 },
-                                                items: globals.kategorije.map((
-                                                    Kategorija value) {
+                                                items: getRezerviranaKampirnaMestaZaUporabnika()
+                                                    .map((KampirnoMesto value) {
+                                                    return new DropdownMenuItem(
+                                                        value: value,
+                                                        child: new Text(
+                                                            value.naziv),
+                                                    );
+                                                }).toList(),
+                                            ),
+                                        ),
+                                    );
+                                },
+                            ),
+                            new FormField(
+                                builder: (FormFieldState state) {
+                                    return InputDecorator(
+                                        decoration: InputDecoration(
+                                            icon: const Icon(Icons.my_location),
+                                            labelText: 'Izberi storitev',
+                                        ),
+                                        child: new DropdownButtonHideUnderline(
+                                            child: new DropdownButton(
+                                                value: izbranaStoritev,
+                                                isDense: true,
+                                                onChanged: (Storitev newValue) {
+                                                    setState(() {
+                                                        izbranaStoritev =
+                                                            newValue;
+                                                        state.didChange(
+                                                            newValue);
+                                                    });
+                                                },
+                                                items: globals.storitve.map((
+                                                    Storitev value) {
                                                     return new DropdownMenuItem(
                                                         value: value,
                                                         child: new Text(
@@ -233,17 +249,16 @@ class _SpremeniKampirnoMestoFormState extends State<SpremeniKampirnoMestoForm> {
                                 padding: const EdgeInsets.only(
                                     left: 40.0, top: 20.0),
                                 child: new RaisedButton(
-                                    disabledColor: Colors.yellowAccent,
-                                    color: Colors.yellowAccent,
+                                    disabledColor: Colors.green,
+                                    color: Colors.green,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
                                             10.0)),
-                                    child: const Text('Popravi'),
+                                    child: const Text('Prijavi se'),
                                     onPressed: () {
-                                        modifyKampirnoMesto();
+                                        addPrijavaNaStoritev();
                                     },
-                                ),
-                            ),
+                                ),),
                         ],
                     ))),
         );

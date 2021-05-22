@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:avtokampi/layouts/hotel_app_theme.dart';
+import 'package:avtokampi/layouts/camp_list_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

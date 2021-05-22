@@ -137,7 +137,6 @@ class ApiController {
         try {
             String url = sprintf(
                 ApiRoutes.REZERVACIJE, [globals.currentUser.id.toString()]);
-            print("URL JE: " + url);
             Map<String, String> headers = {
                 "Content-type": "application/json",
                 "Authorization": "Bearer ${globals.jwtToken}"

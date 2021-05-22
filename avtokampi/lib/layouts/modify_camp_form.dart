@@ -18,20 +18,27 @@ class MyApp extends StatelessWidget {
             theme: new ThemeData(
                 primarySwatch: Colors.blue,
             ),
-            home: new DodajKampForm(),
+            home: new SpremeniKampForm(),
         );
     }
 }
 
-class DodajKampForm extends StatefulWidget {
-    DodajKampForm({Key key}) : super(key: key);
+class SpremeniKampForm extends StatefulWidget {
+    SpremeniKampForm({Key key, this.avtokamp}) : super(key: key);
+
+    final Avtokamp avtokamp;
 
     @override
-    _DodajKampFormState createState() => new _DodajKampFormState();
+    _SpremeniKampFormState createState() =>
+        new _SpremeniKampFormState(avtokamp);
 }
 
-class _DodajKampFormState extends State<DodajKampForm> {
+class _SpremeniKampFormState extends State<SpremeniKampForm> {
     final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+    Avtokamp avtokamp;
+
+    _SpremeniKampFormState(this.avtokamp);
 
     int trenutniUporabnik = globals.currentUser.id;
     Drzava izbranaDrzava = globals.drzave[0];
@@ -41,6 +48,37 @@ class _DodajKampFormState extends State<DodajKampForm> {
     TextEditingController naslovKampaKontroler = TextEditingController();
     TextEditingController telefonKampaKontroler = TextEditingController();
     TextEditingController nazivLokacijaKampaKontroler = TextEditingController();
+
+    @override
+    void initState() {
+        super.initState();
+        izbranaRegija = getRegijaById(avtokamp.regija);
+        izbranaDrzava = getDrzavaById(izbranaRegija.drzava);
+        nazivKampaKontroler = TextEditingController(text: avtokamp.naziv);
+        opisKampaKontroler = TextEditingController(text: avtokamp.opis);
+        naslovKampaKontroler = TextEditingController(text: avtokamp.naslov);
+        nazivLokacijaKampaKontroler =
+            TextEditingController(text: avtokamp.nazivLokacije);
+        nazivLokacijaKampaKontroler =
+            TextEditingController(text: avtokamp.nazivLokacije);
+        telefonKampaKontroler = TextEditingController(text: avtokamp.telefon);
+    }
+
+    Regija getRegijaById(int idRegije) {
+        for (Regija regija in globals.regije) {
+            if (regija.id == idRegije) {
+                return regija;
+            }
+        }
+    }
+
+    Drzava getDrzavaById(int idDrzava) {
+        for (Drzava drzava in globals.drzave) {
+            if (drzava.id == idDrzava) {
+                return drzava;
+            }
+        }
+    }
 
     List<Regija> getRegijeZaDrzavo(Drzava drzava) {
         List<Regija> regije = [];
@@ -62,24 +100,29 @@ class _DodajKampFormState extends State<DodajKampForm> {
         return regije;
     }
 
-    addAvtokamp() {
+    modifyAvtokamp()async {
         ApiController apiController = new ApiController();
         Response response;
-        apiController.addAvtokamp(
-            nazivKampaKontroler.text, nazivLokacijaKampaKontroler.text,
-            naslovKampaKontroler.text, telefonKampaKontroler.text,
-            opisKampaKontroler.text, izbranaRegija.id).then((apiResponse) {
+        await apiController.modifyAvtokamp(
+            avtokamp.id,
+            nazivKampaKontroler.text,
+            nazivLokacijaKampaKontroler.text,
+            naslovKampaKontroler.text,
+            telefonKampaKontroler.text,
+            opisKampaKontroler.text,
+            izbranaRegija.id).then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
-            if (response.statusCode == 201) {
+            if (response.statusCode == 204) {
+                globals.avtokampi.remove(avtokamp);
                 globals.avtokampi.add(new Avtokamp.novi(
                     nazivKampaKontroler.text, nazivLokacijaKampaKontroler.text,
                     naslovKampaKontroler.text, telefonKampaKontroler.text,
                     opisKampaKontroler.text, izbranaRegija.id));
-                print("Avtokamp je bil uspešno dodan!");
+                print("Avtokamp je bil uspešno spremenjen!");
                 _ackAlert();
             } else {
-                print("Avtokamp ni bil uspešno dodan!");
+                print("Avtokamp ni bil uspešno spremenjen!");
                 _ackAlert2();
             }
         });
@@ -99,13 +142,13 @@ class _DodajKampFormState extends State<DodajKampForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'AVTOKAMP',
+                        'SPREMEMBE',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Avtokamp je bil uspešno dodan!',
+                        'Avtokamp je bil uspešno spremenjen!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -131,13 +174,13 @@ class _DodajKampFormState extends State<DodajKampForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'AVTOKAMP',
+                        'SPREMEMBE',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Avtokamp žal ni bil uspešno dodan!',
+                        'Avtokamp žal ni bil uspešno spremenjen!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -153,7 +196,7 @@ class _DodajKampFormState extends State<DodajKampForm> {
     Widget build(BuildContext context) {
         return new Scaffold(
             appBar: new AppBar(
-                title: new Text("VPIS NOVEGA KAMPA"),
+                title: new Text("SPREMEMBA KAMPA"),
             ),
             body: new SafeArea(
                 top: false,
@@ -167,7 +210,7 @@ class _DodajKampFormState extends State<DodajKampForm> {
                         children: <Widget>[
                             new Text(""),
                             new Text(
-                                "Vpišite podatke za vaš novi kamp: ",
+                                "Vpišite podatke za spremenjeni kamp: ",
                                 textAlign: TextAlign.center),
                             new Text(""),
                             new TextFormField(
@@ -286,14 +329,14 @@ class _DodajKampFormState extends State<DodajKampForm> {
                                 padding: const EdgeInsets.only(
                                     left: 40.0, top: 20.0),
                                 child: new RaisedButton(
-                                    disabledColor: Colors.red,
-                                    color: Colors.red,
+                                    disabledColor: Colors.yellowAccent,
+                                    color: Colors.yellowAccent,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
                                             10.0)),
-                                    child: const Text('Dodaj'),
+                                    child: const Text('Popravi'),
                                     onPressed: () {
-                                        addAvtokamp();
+                                        modifyAvtokamp();
                                     },
                                 ),),
                         ],

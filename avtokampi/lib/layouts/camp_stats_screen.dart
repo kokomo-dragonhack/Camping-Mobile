@@ -1,25 +1,19 @@
-import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/running_view.dart';
+import 'package:avtokampi/layouts/profile_theme.dart';
+import 'package:avtokampi/layouts/opinions_list_view.dart';
+import 'package:avtokampi/layouts/camp_stats_view.dart';
 import 'package:avtokampi/layouts/title_view.dart';
-import 'package:avtokampi/layouts/workout_view.dart';
-import 'package:avtokampi/models/Avtokamp.dart';
-import 'package:avtokampi/models/KampirnoMesto.dart';
-import 'package:avtokampi/models/Rezervacija.dart';
-import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';
 import 'package:flutter/material.dart';
 
-import '../layouts/fintness_app_theme.dart';
-
-class TrainingScreen extends StatefulWidget {
-    const TrainingScreen({Key key, this.animationController}) : super(key: key);
+class MyDiaryScreen extends StatefulWidget {
+    const MyDiaryScreen({Key key, this.animationController}) : super(key: key);
 
     final AnimationController animationController;
 
     @override
-    _TrainingScreenState createState() => _TrainingScreenState();
+    _MyDiaryScreenState createState() => _MyDiaryScreenState();
 }
 
-class _TrainingScreenState extends State<TrainingScreen>
+class _MyDiaryScreenState extends State<MyDiaryScreen>
     with TickerProviderStateMixin {
     Animation<double> topBarAnimation;
 
@@ -27,11 +21,8 @@ class _TrainingScreenState extends State<TrainingScreen>
     final ScrollController scrollController = ScrollController();
     double topBarOpacity = 0.0;
 
-    //List<StoritevKampirnegaMesta> storitveKampirnihMest = [];
-
     @override
     void initState() {
-        //storitveKampirnihMest = getStoritveZaUporabnika();
         topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
                 parent: widget.animationController,
@@ -64,11 +55,11 @@ class _TrainingScreenState extends State<TrainingScreen>
     }
 
     void addAllListData() {
-        const int count = 5;
+        const int count = 9;
 
         listViews.add(
             TitleView(
-                titleTxt: 'Vaše rezervacije',
+                titleTxt: 'Statistika uporabnika',
                 subTxt: 'Več',
                 animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
@@ -80,7 +71,20 @@ class _TrainingScreenState extends State<TrainingScreen>
             ),
         );
         listViews.add(
-            WorkoutView(
+            MediterranesnDietView(
+                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                        parent: widget.animationController,
+                        curve:
+                        Interval((1 / count) * 1, 1.0,
+                            curve: Curves.fastOutSlowIn))),
+                animationController: widget.animationController,
+            ),
+        );
+        listViews.add(
+            TitleView(
+                titleTxt: 'Oddana mnenja',
+                subTxt: 'Več',
                 animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
                         parent: widget.animationController,
@@ -91,85 +95,16 @@ class _TrainingScreenState extends State<TrainingScreen>
             ),
         );
         listViews.add(
-            TitleView(
-                titleTxt: 'Prijave na storitve',
-                subTxt: 'Več',
-                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+            MealsListView(
+                mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0)
+                    .animate(
                     CurvedAnimation(
                         parent: widget.animationController,
-                        curve:
-                        Interval((1 / count) * 0, 1.0,
+                        curve: Interval((1 / count) * 3, 1.0,
                             curve: Curves.fastOutSlowIn))),
-                animationController: widget.animationController,
+                mainScreenAnimationController: widget.animationController,
             ),
         );
-        listViews.add(
-            RunningView(
-                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                    CurvedAnimation(
-                        parent: widget.animationController,
-                        curve:
-                        Interval((1 / count) * 3, 1.0,
-                            curve: Curves.fastOutSlowIn))),
-                animationController: widget.animationController,
-            ),
-        );
-//        listViews.add(ListView.builder(
-//            padding: const EdgeInsets.all(4),
-//            itemCount: storitveKampirnihMest.length,
-//            itemBuilder: (BuildContext context, int index) {
-//                return Container(
-//                    height: 50,
-//                    color: Colors.deepOrange,
-//                    child: Center(child: Text('Avtokamp: ${getKampById(
-//                        getKampirnoMestoById(
-//                            storitveKampirnihMest[index].kampirnoMesto)
-//                            .avtokamp)
-//                        .naziv}, Kampirno mesto:${getKampirnoMestoById(
-//                        storitveKampirnihMest[index].kampirnoMesto)
-//                        .naziv}, Storitev ${storitveKampirnihMest[index]}',
-//                        style: TextStyle(fontSize: 10),)),
-//                );
-//            }
-//        ));
-    }
-
-    List<StoritevKampirnegaMesta> getStoritveZaUporabnika() {
-        List<int> kampirnaMesta = getRezerviranaKampirnaMestaZaUporabnika();
-        List<StoritevKampirnegaMesta> storitveKampirnihMest = [];
-        for (StoritevKampirnegaMesta storitevKampirnegaMesta in globals
-            .storitveKampirnihMest) {
-            if (kampirnaMesta.contains(storitevKampirnegaMesta.kampirnoMesto)) {
-                storitveKampirnihMest.add(storitevKampirnegaMesta);
-            }
-        }
-        return storitveKampirnihMest;
-    }
-
-    KampirnoMesto getKampirnoMestoById(mestoId) {
-        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
-            if (kampirnoMesto.id == mestoId) {
-                return kampirnoMesto;
-            }
-        }
-    }
-
-    Avtokamp getKampById(int kampId) {
-        for (Avtokamp avtokamp in globals.avtokampi) {
-            if (avtokamp.id == kampId) {
-                return avtokamp;
-            }
-        }
-    }
-
-    List<int> getRezerviranaKampirnaMestaZaUporabnika() {
-        List<int> kampirnaMesta = [];
-        for (Rezervacija r in globals.rezervacije) {
-            if (r.uporabnik == globals.currentUser.id) {
-                kampirnaMesta.add(r.kampirnoMesto);
-            }
-        }
-        return kampirnaMesta;
     }
 
     Future<bool> getData() async {
@@ -285,7 +220,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                                 padding: const EdgeInsets
                                                                     .all(8.0),
                                                                 child: Text(
-                                                                    'Ostalo',
+                                                                    'Statistika',
                                                                     textAlign: TextAlign
                                                                         .left,
                                                                     style: TextStyle(

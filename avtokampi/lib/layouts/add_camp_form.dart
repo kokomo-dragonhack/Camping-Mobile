@@ -1,9 +1,8 @@
 import 'package:avtokampi/controllers/api_controller.dart';
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/models/KampirnoMesto.dart';
-import 'package:avtokampi/models/Rezervacija.dart';
-import 'package:avtokampi/models/Storitev.dart';
-import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';
+import 'package:avtokampi/models/Avtokamp.dart';
+import 'package:avtokampi/models/Drzava.dart';
+import 'package:avtokampi/models/Regija.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:http/http.dart';
@@ -19,77 +18,68 @@ class MyApp extends StatelessWidget {
             theme: new ThemeData(
                 primarySwatch: Colors.blue,
             ),
-            home: new StoritveForm(),
+            home: new DodajKampForm(),
         );
     }
 }
 
-class StoritveForm extends StatefulWidget {
-    StoritveForm({Key key}) : super(key: key);
+class DodajKampForm extends StatefulWidget {
+    DodajKampForm({Key key}) : super(key: key);
 
     @override
-    _StoritveFormState createState() => new _StoritveFormState();
+    _DodajKampFormState createState() => new _DodajKampFormState();
 }
 
-class _StoritveFormState extends State<StoritveForm> {
+class _DodajKampFormState extends State<DodajKampForm> {
     final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
-    KampirnoMesto izbranoKampirnoMesto = getRezerviranaKampirnaMestaZaUporabnikaStaticna()[0];
-    Storitev izbranaStoritev = globals.storitve[0];
+    int trenutniUporabnik = globals.currentUser.id;
+    Drzava izbranaDrzava = globals.drzave[0];
+    Regija izbranaRegija = getRegijeZaDrzavoStaticna(globals.drzave[0])[0];
+    TextEditingController nazivKampaKontroler = TextEditingController();
+    TextEditingController opisKampaKontroler = TextEditingController();
+    TextEditingController naslovKampaKontroler = TextEditingController();
+    TextEditingController telefonKampaKontroler = TextEditingController();
+    TextEditingController nazivLokacijaKampaKontroler = TextEditingController();
 
-    List<KampirnoMesto> getRezerviranaKampirnaMestaZaUporabnika() {
-        List<KampirnoMesto> kampirnaMesta = [];
-        for (Rezervacija r in globals.rezervacije) {
-            if (r.uporabnik == globals.currentUser.id) {
-                kampirnaMesta.add(getKampirnoMestoById(r.kampirnoMesto));
+    List<Regija> getRegijeZaDrzavo(Drzava drzava) {
+        List<Regija> regije = [];
+        for (Regija regija in globals.regije) {
+            if (regija.drzava == drzava.id) {
+                regije.add(regija);
             }
         }
-        return kampirnaMesta;
+        return regije;
     }
 
-    KampirnoMesto getKampirnoMestoById(int kampirnoMestoId) {
-        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
-            if (kampirnoMesto.id == kampirnoMestoId) {
-                return kampirnoMesto;
+    static List<Regija> getRegijeZaDrzavoStaticna(Drzava drzava) {
+        List<Regija> regije = [];
+        for (Regija regija in globals.regije) {
+            if (regija.drzava == drzava.id) {
+                regije.add(regija);
             }
         }
+        return regije;
     }
 
-    static KampirnoMesto getKampirnoMestoByIdStaticna(int kampirnoMestoId) {
-        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
-            if (kampirnoMesto.id == kampirnoMestoId) {
-                return kampirnoMesto;
-            }
-        }
-    }
-
-    static List<
-        KampirnoMesto> getRezerviranaKampirnaMestaZaUporabnikaStaticna() {
-        List<KampirnoMesto> kampirnaMesta = [];
-        for (Rezervacija r in globals.rezervacije) {
-            if (r.uporabnik == globals.currentUser.id) {
-                kampirnaMesta.add(
-                    getKampirnoMestoByIdStaticna(r.kampirnoMesto));
-            }
-        }
-        return kampirnaMesta;
-    }
-
-    addPrijavaNaStoritev() {
+    addAvtokamp() async {
         ApiController apiController = new ApiController();
         Response response;
-        apiController.addPrijavaNaStoritev(
-            izbranoKampirnoMesto.id, izbranaStoritev.id).then((apiResponse) {
+        await apiController.addAvtokamp(
+            nazivKampaKontroler.text, nazivLokacijaKampaKontroler.text,
+            naslovKampaKontroler.text, telefonKampaKontroler.text,
+            opisKampaKontroler.text, izbranaRegija.id).then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {
             if (response.statusCode == 201) {
-                globals.storitveKampirnihMest.add(
-                    new StoritevKampirnegaMesta.nova(
-                        izbranoKampirnoMesto.id, izbranaStoritev.id));
-                print("Storitev je bila uspešno dodana!");
+                globals.avtokampi.add(new Avtokamp.novi(
+                    nazivKampaKontroler.text, nazivLokacijaKampaKontroler.text,
+                    naslovKampaKontroler.text, telefonKampaKontroler.text,
+                    opisKampaKontroler.text, izbranaRegija.id));
+                print("Avtokamp je bil uspešno dodan!");
                 _ackAlert();
             } else {
-                print("Storitev ni bila uspešno dodana!");
+                print("Avtokamp ni bil uspešno dodan!");
                 _ackAlert2();
             }
         });
@@ -109,13 +99,13 @@ class _StoritveFormState extends State<StoritveForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'STORITEV',
+                        'AVTOKAMP',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Storitev je bila uspešno dodana!',
+                        'Avtokamp je bil uspešno dodan!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -141,13 +131,13 @@ class _StoritveFormState extends State<StoritveForm> {
                     buttonOkText: Text("Ok"),
                     buttonCancelText: Text("Nazaj"),
                     title: Text(
-                        'STORITEV',
+                        'AVTOKAMP',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.w600),
                     ),
                     description: Text(
-                        'Storitev žal ni bila uspešno dodana!',
+                        'Avtokamp žal ni bil uspešno dodan!',
                         textAlign: TextAlign.center,
                     ),
                     onOkButtonPressed: () {
@@ -163,7 +153,7 @@ class _StoritveFormState extends State<StoritveForm> {
     Widget build(BuildContext context) {
         return new Scaffold(
             appBar: new AppBar(
-                title: new Text("PRIJAVA NA STORITEV"),
+                title: new Text("VPIS NOVEGA KAMPA"),
             ),
             body: new SafeArea(
                 top: false,
@@ -177,31 +167,77 @@ class _StoritveFormState extends State<StoritveForm> {
                         children: <Widget>[
                             new Text(""),
                             new Text(
-                                "Izberite storitev in ostale podatke: ",
+                                "Vpišite podatke za vaš novi kamp: ",
                                 textAlign: TextAlign.center),
                             new Text(""),
+                            new TextFormField(
+                                controller: nazivKampaKontroler,
+                                decoration: const InputDecoration(
+                                    icon: const Icon(Icons.text_fields),
+                                    hintText: 'Naziv avtokampa',
+                                    labelText: 'Naziv avtokampa',
+                                ),
+                            ),
+                            new Text(""),
+                            new TextFormField(
+                                controller: nazivLokacijaKampaKontroler,
+                                decoration: const InputDecoration(
+                                    icon: const Icon(Icons.location_on),
+                                    hintText: 'Naziv lokacije (kraj)',
+                                    labelText: 'Naziv lokacije (kraj)',
+                                ),
+                            ),
+                            new Text(""),
+                            new TextFormField(
+                                controller: naslovKampaKontroler,
+                                decoration: const InputDecoration(
+                                    icon: const Icon(Icons.my_location),
+                                    hintText: 'Naslov avtokampa',
+                                    labelText: 'Naslov avtokampa',
+                                ),
+                            ),
+                            new Text(""),
+                            new TextFormField(
+                                controller: telefonKampaKontroler,
+                                decoration: const InputDecoration(
+                                    icon: const Icon(Icons.phone),
+                                    hintText: 'Telefon avtokampa',
+                                    labelText: 'Telefon avtokampa',
+                                ),
+                            ),
+                            new Text(""),
+                            new TextFormField(
+                                controller: opisKampaKontroler,
+                                decoration: const InputDecoration(
+                                    icon: const Icon(Icons.message),
+                                    hintText: 'Opis avtokampa',
+                                    labelText: 'Opis avtokampa',
+                                ),
+                            ),
                             new FormField(
                                 builder: (FormFieldState state) {
                                     return InputDecorator(
                                         decoration: InputDecoration(
                                             icon: const Icon(Icons.place),
-                                            labelText: 'Izberi kampirno mesto',
+                                            labelText: 'Izberi državo',
                                         ),
                                         child: new DropdownButtonHideUnderline(
                                             child: new DropdownButton(
-                                                value: izbranoKampirnoMesto,
+                                                value: izbranaDrzava,
                                                 isDense: true,
-                                                onChanged: (
-                                                    KampirnoMesto newValue) {
+                                                onChanged: (Drzava newValue) {
                                                     setState(() {
-                                                        izbranoKampirnoMesto =
+                                                        izbranaDrzava =
                                                             newValue;
                                                         state.didChange(
                                                             newValue);
+                                                        izbranaRegija =
+                                                        getRegijeZaDrzavo(
+                                                            izbranaDrzava)[0];
                                                     });
                                                 },
-                                                items: getRezerviranaKampirnaMestaZaUporabnika()
-                                                    .map((KampirnoMesto value) {
+                                                items: globals.drzave.map((
+                                                    Drzava value) {
                                                     return new DropdownMenuItem(
                                                         value: value,
                                                         child: new Text(
@@ -218,22 +254,23 @@ class _StoritveFormState extends State<StoritveForm> {
                                     return InputDecorator(
                                         decoration: InputDecoration(
                                             icon: const Icon(Icons.my_location),
-                                            labelText: 'Izberi storitev',
+                                            labelText: 'Izberi regijo',
                                         ),
                                         child: new DropdownButtonHideUnderline(
                                             child: new DropdownButton(
-                                                value: izbranaStoritev,
+                                                value: izbranaRegija,
                                                 isDense: true,
-                                                onChanged: (Storitev newValue) {
+                                                onChanged: (Regija newValue) {
                                                     setState(() {
-                                                        izbranaStoritev =
+                                                        izbranaRegija =
                                                             newValue;
                                                         state.didChange(
                                                             newValue);
                                                     });
                                                 },
-                                                items: globals.storitve.map((
-                                                    Storitev value) {
+                                                items: getRegijeZaDrzavo(
+                                                    izbranaDrzava).map((
+                                                    Regija value) {
                                                     return new DropdownMenuItem(
                                                         value: value,
                                                         child: new Text(
@@ -249,14 +286,14 @@ class _StoritveFormState extends State<StoritveForm> {
                                 padding: const EdgeInsets.only(
                                     left: 40.0, top: 20.0),
                                 child: new RaisedButton(
-                                    disabledColor: Colors.green,
-                                    color: Colors.green,
+                                    disabledColor: Colors.red,
+                                    color: Colors.red,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
                                             10.0)),
-                                    child: const Text('Prijavi se'),
+                                    child: const Text('Dodaj'),
                                     onPressed: () {
-                                        addPrijavaNaStoritev();
+                                        addAvtokamp();
                                     },
                                 ),),
                         ],

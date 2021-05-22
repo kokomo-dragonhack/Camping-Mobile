@@ -1,5 +1,5 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/storitve_forma.dart';
+import 'package:avtokampi/layouts/camp_services_form.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
 import 'package:avtokampi/models/Storitev.dart';
 import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';

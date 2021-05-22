@@ -1,11 +1,11 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/narocene_storitve_list.dart';
-import 'package:avtokampi/layouts/storitve_forma.dart';
+import 'package:avtokampi/layouts/reserved_services_list.dart';
+import 'package:avtokampi/layouts/camp_services_form.dart';
 import 'package:avtokampi/models/Rezervacija.dart';
 import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';
 import 'package:flutter/material.dart';
 
-import 'fintness_app_theme.dart';
+import 'profile_theme.dart';
 
 class RunningView extends StatelessWidget {
     final AnimationController animationController;

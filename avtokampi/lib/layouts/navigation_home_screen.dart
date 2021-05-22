@@ -1,13 +1,13 @@
 import 'package:avtokampi/app_theme.dart';
 import 'package:avtokampi/layouts/drawer_user_controller.dart';
-import 'package:avtokampi/layouts/home_drawer.dart';
+import 'package:avtokampi/layouts/menu_drawer.dart';
 import 'package:avtokampi/layouts/home_screen.dart';
 import 'package:avtokampi/layouts/hotel_home_screen.dart';
-import 'package:avtokampi/layouts/rezervacija_forma.dart';
+import 'package:avtokampi/layouts/camp_reservation_form.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 
-import 'kampi_mnenja_list.dart';
+import 'opinions_list.dart';
 
 class NavigationHomeScreen extends StatefulWidget {
     @override

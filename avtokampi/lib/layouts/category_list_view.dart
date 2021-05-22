@@ -1,8 +1,8 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/category_kampirno_mesto.dart';
-import 'package:avtokampi/layouts/design_course_app_theme.dart';
-import 'package:avtokampi/layouts/hotel_list_data.dart';
-import 'package:avtokampi/layouts/rezervacija_forma.dart';
+import 'package:avtokampi/layouts/category_camping_space.dart';
+import 'package:avtokampi/layouts/app_theme.dart';
+import 'package:avtokampi/layouts/camp_list_data.dart';
+import 'package:avtokampi/layouts/camp_reservation_form.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
@@ -10,17 +10,17 @@ import 'package:flutter/material.dart';
 
 class CategoryListView extends StatefulWidget {
     CategoryListView(
-        {Key key, this.callBack, this.avtokamp, this.hotelListData, this.kategorija})
+        {Key key, this.callBack, this.avtokamp, this.campListData, this.kategorija})
         : super(key: key);
 
     final Function callBack;
     final Avtokamp avtokamp;
-    final HotelListData hotelListData;
+    final CampListData campListData;
     final int kategorija;
 
     @override
     _CategoryListViewState createState() =>
-        _CategoryListViewState(avtokamp, hotelListData, kategorija);
+        _CategoryListViewState(avtokamp, campListData, kategorija);
 }
 
 class _CategoryListViewState extends State<CategoryListView>
@@ -29,9 +29,9 @@ class _CategoryListViewState extends State<CategoryListView>
     List<Category> categoryList;
     Avtokamp avtokamp;
 
-    _CategoryListViewState(this.avtokamp, this.hotelListData, this.kategorija);
+    _CategoryListViewState(this.avtokamp, this.campListData, this.kategorija);
 
-    HotelListData hotelListData;
+    CampListData campListData;
     int kategorija;
 
     @override
@@ -40,12 +40,12 @@ class _CategoryListViewState extends State<CategoryListView>
             duration: const Duration(milliseconds: 2000), vsync: this);
         super.initState();
         categoryList = Category.getKampirnaMestaForKamp(
-            avtokamp, hotelListData, globals.kategorija);
+            avtokamp, campListData, globals.kategorija);
     }
 
     Future<bool> getData() async {
         categoryList = Category.getKampirnaMestaForKamp(
-            avtokamp, hotelListData, globals.kategorija);
+            avtokamp, campListData, globals.kategorija);
         await Future<dynamic>.delayed(const Duration(milliseconds: 50));
         return true;
     }

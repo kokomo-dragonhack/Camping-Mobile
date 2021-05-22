@@ -52,11 +52,11 @@ class _KampiListState extends State<KampiList> {
         }
     }
 
-    addMnenje() {
+    addMnenje() async {
         ApiController apiController = new ApiController();
         Response response;
         int avtokampId = getKampIdByIme(this.izbraniKamp);
-        apiController.addOpinion(this.uporabnikId, avtokampId, this.mnenje,
+        await apiController.addOpinion(this.uporabnikId, avtokampId, this.mnenje,
             this.izbranaOcena.toInt()).then((apiResponse) {
             response = apiResponse;
         }).whenComplete(() {

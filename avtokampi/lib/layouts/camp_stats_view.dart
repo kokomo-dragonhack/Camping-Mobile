@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/fintness_app_theme.dart';
+import 'package:avtokampi/layouts/profile_theme.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Mnenje.dart';
 import 'package:avtokampi/models/Rezervacija.dart';

@@ -1,19 +1,25 @@
-import 'package:avtokampi/layouts/fintness_app_theme.dart';
-import 'package:avtokampi/layouts/meals_list_view.dart';
-import 'package:avtokampi/layouts/mediterranesn_diet_view.dart';
+import 'package:avtokampi/globals.dart' as globals;
+import 'package:avtokampi/layouts/user_profile_view.dart';
 import 'package:avtokampi/layouts/title_view.dart';
+import 'package:avtokampi/layouts/submit_reservation_view.dart';
+import 'package:avtokampi/models/Avtokamp.dart';
+import 'package:avtokampi/models/KampirnoMesto.dart';
+import 'package:avtokampi/models/Rezervacija.dart';
+import 'package:avtokampi/models/StoritevKampirnegaMesta.dart';
 import 'package:flutter/material.dart';
 
-class MyDiaryScreen extends StatefulWidget {
-    const MyDiaryScreen({Key key, this.animationController}) : super(key: key);
+import '../layouts/profile_theme.dart';
+
+class TrainingScreen extends StatefulWidget {
+    const TrainingScreen({Key key, this.animationController}) : super(key: key);
 
     final AnimationController animationController;
 
     @override
-    _MyDiaryScreenState createState() => _MyDiaryScreenState();
+    _TrainingScreenState createState() => _TrainingScreenState();
 }
 
-class _MyDiaryScreenState extends State<MyDiaryScreen>
+class _TrainingScreenState extends State<TrainingScreen>
     with TickerProviderStateMixin {
     Animation<double> topBarAnimation;
 
@@ -21,8 +27,11 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     final ScrollController scrollController = ScrollController();
     double topBarOpacity = 0.0;
 
+    //List<StoritevKampirnegaMesta> storitveKampirnihMest = [];
+
     @override
     void initState() {
+        //storitveKampirnihMest = getStoritveZaUporabnika();
         topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
                 parent: widget.animationController,
@@ -55,11 +64,11 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     }
 
     void addAllListData() {
-        const int count = 9;
+        const int count = 5;
 
         listViews.add(
             TitleView(
-                titleTxt: 'Statistika uporabnika',
+                titleTxt: 'Vaše rezervacije',
                 subTxt: 'Več',
                 animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
@@ -71,20 +80,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             ),
         );
         listViews.add(
-            MediterranesnDietView(
-                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                    CurvedAnimation(
-                        parent: widget.animationController,
-                        curve:
-                        Interval((1 / count) * 1, 1.0,
-                            curve: Curves.fastOutSlowIn))),
-                animationController: widget.animationController,
-            ),
-        );
-        listViews.add(
-            TitleView(
-                titleTxt: 'Oddana mnenja',
-                subTxt: 'Več',
+            WorkoutView(
                 animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
                         parent: widget.animationController,
@@ -95,16 +91,67 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             ),
         );
         listViews.add(
-            MealsListView(
-                mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0)
-                    .animate(
+            TitleView(
+                titleTxt: 'Prijave na storitve',
+                subTxt: 'Več',
+                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
                         parent: widget.animationController,
-                        curve: Interval((1 / count) * 3, 1.0,
+                        curve:
+                        Interval((1 / count) * 0, 1.0,
                             curve: Curves.fastOutSlowIn))),
-                mainScreenAnimationController: widget.animationController,
+                animationController: widget.animationController,
             ),
         );
+        listViews.add(
+            RunningView(
+                animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                        parent: widget.animationController,
+                        curve:
+                        Interval((1 / count) * 3, 1.0,
+                            curve: Curves.fastOutSlowIn))),
+                animationController: widget.animationController,
+            ),
+        );
+    }
+
+    List<StoritevKampirnegaMesta> getStoritveZaUporabnika() {
+        List<int> kampirnaMesta = getRezerviranaKampirnaMestaZaUporabnika();
+        List<StoritevKampirnegaMesta> storitveKampirnihMest = [];
+        for (StoritevKampirnegaMesta storitevKampirnegaMesta in globals
+            .storitveKampirnihMest) {
+            if (kampirnaMesta.contains(storitevKampirnegaMesta.kampirnoMesto)) {
+                storitveKampirnihMest.add(storitevKampirnegaMesta);
+            }
+        }
+        return storitveKampirnihMest;
+    }
+
+    KampirnoMesto getKampirnoMestoById(mestoId) {
+        for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
+            if (kampirnoMesto.id == mestoId) {
+                return kampirnoMesto;
+            }
+        }
+    }
+
+    Avtokamp getKampById(int kampId) {
+        for (Avtokamp avtokamp in globals.avtokampi) {
+            if (avtokamp.id == kampId) {
+                return avtokamp;
+            }
+        }
+    }
+
+    List<int> getRezerviranaKampirnaMestaZaUporabnika() {
+        List<int> kampirnaMesta = [];
+        for (Rezervacija r in globals.rezervacije) {
+            if (r.uporabnik == globals.currentUser.id) {
+                kampirnaMesta.add(r.kampirnoMesto);
+            }
+        }
+        return kampirnaMesta;
     }
 
     Future<bool> getData() async {
@@ -220,7 +267,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                                                                 padding: const EdgeInsets
                                                                     .all(8.0),
                                                                 child: Text(
-                                                                    'Statistika',
+                                                                    'Ostalo',
                                                                     textAlign: TextAlign
                                                                         .left,
                                                                     style: TextStyle(
