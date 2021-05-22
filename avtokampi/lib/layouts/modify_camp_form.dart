@@ -100,7 +100,7 @@ class _SpremeniKampFormState extends State<SpremeniKampForm> {
         return regije;
     }
 
-    modifyAvtokamp()async {
+    modifyAvtokamp() async {
         ApiController apiController = new ApiController();
         Response response;
         await apiController.modifyAvtokamp(

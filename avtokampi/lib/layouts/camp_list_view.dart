@@ -1,6 +1,6 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
 import 'package:avtokampi/layouts/camp_list_app_theme.dart';
+import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
 import 'package:avtokampi/models/Mnenje.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

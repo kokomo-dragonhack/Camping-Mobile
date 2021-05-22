@@ -47,7 +47,8 @@ class ApiDataGetter {
     getCeniki() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            await apiController.getCenikiForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getCenikiForKamp(avtokamp.id).then((
+                apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -135,7 +136,8 @@ class ApiDataGetter {
     getMnenja() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            await apiController.getMnenjaForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getMnenjaForKamp(avtokamp.id).then((
+                apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -184,7 +186,8 @@ class ApiDataGetter {
     getSlike() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            await apiController.getSlikeForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getSlikeForKamp(avtokamp.id).then((
+                apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -235,7 +238,8 @@ class ApiDataGetter {
     getStoritveKampa() async {
         for (Avtokamp avtokamp in globals.avtokampi) {
             Response response;
-            await apiController.getStoritveForKamp(avtokamp.id).then((apiResponse) {
+            await apiController.getStoritveForKamp(avtokamp.id).then((
+                apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -256,8 +260,8 @@ class ApiDataGetter {
     getStoritveKampirnihMest() async {
         for (KampirnoMesto kampirnoMesto in globals.kampirnaMesta) {
             Response response;
-            await apiController.getStoritveForKampirnoMesto(kampirnoMesto.id).then((
-                apiResponse) {
+            await apiController.getStoritveForKampirnoMesto(kampirnoMesto.id)
+                .then((apiResponse) {
                 response = apiResponse;
             }).whenComplete(() {
                 if (response.statusCode == 200) {
@@ -319,7 +323,8 @@ class ApiDataGetter {
             globals.dataLoaded = true;
             print("PODATKI:");
             print("Uporabnik: ${globals.currentUser.toString()}");
-            print("Uporabnik-pravice: ${globals.currentUser.pravica.toString()}");
+            print(
+                "Uporabnik-pravice: ${globals.currentUser.pravica.toString()}");
             print("Avtokampi: ${globals.avtokampi.toString()}");
             print("Ceniki: ${globals.ceniki.toString()}");
             print("Drzave: ${globals.drzave.toString()}");

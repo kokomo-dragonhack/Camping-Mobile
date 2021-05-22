@@ -43,7 +43,8 @@ class LoginScreen extends StatelessWidget {
     Future<String> _onRegister(LoginData data) async {
         print('Name: ${data.name}, Password: ${data.password}');
         Response response;
-        await apiController.register(data.name, data.name, data.name, data.password)
+        await apiController.register(
+            data.name, data.name, data.name, data.password)
             .then((apiResponse) {
             response = apiResponse;
             print(response.statusCode);

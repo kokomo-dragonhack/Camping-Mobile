@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/camps_map.dart';
 import 'package:avtokampi/layouts/calendar_popup_view.dart';
 import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/layouts/camp_list_view.dart';
+import 'package:avtokampi/layouts/camps_map.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 
-import 'filters_screen.dart';
 import 'camp_list_app_theme.dart';
+import 'filters_screen.dart';
 
 class HotelHomeScreen extends StatefulWidget {
     @override

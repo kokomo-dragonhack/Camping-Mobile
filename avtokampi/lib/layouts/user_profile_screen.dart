@@ -1,7 +1,7 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/user_profile_view.dart';
-import 'package:avtokampi/layouts/title_view.dart';
 import 'package:avtokampi/layouts/submit_reservation_view.dart';
+import 'package:avtokampi/layouts/title_view.dart';
+import 'package:avtokampi/layouts/user_profile_view.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
 import 'package:avtokampi/models/Rezervacija.dart';

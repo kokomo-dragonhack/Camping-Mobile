@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/camp_map.dart';
 import 'package:avtokampi/layouts/camp_list_data.dart';
+import 'package:avtokampi/layouts/camp_map.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:avtokampi/models/KampirnoMesto.dart';
 import 'package:avtokampi/models/Slika.dart';

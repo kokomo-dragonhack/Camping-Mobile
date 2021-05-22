@@ -1,7 +1,7 @@
 import 'package:avtokampi/globals.dart' as globals;
-import 'package:avtokampi/layouts/category_list_view.dart';
-import 'package:avtokampi/layouts/camp_space_info_screen.dart';
 import 'package:avtokampi/layouts/camp_list_data.dart';
+import 'package:avtokampi/layouts/camp_space_info_screen.dart';
+import 'package:avtokampi/layouts/category_list_view.dart';
 import 'package:avtokampi/layouts/popular_course_list_view.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
