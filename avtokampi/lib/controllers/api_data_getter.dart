@@ -309,23 +309,17 @@ class ApiDataGetter {
         if (!globals.dataLoaded) {
             await getPodatkiZaUporabnika();
             await getAvtokampi();
-            //await getCeniki();
             await getDrzave();
-            //await getKampirnaMesta();
             await getKategorije();
             await getKategorijeStoritev();
-            //await getMnenja();
             await getRegije();
-            //await getSlike();
             await getStatusiRezervacij();
             await getStoritve();
-            //await getStoritveKampirnihMest();
             await getVrsteKampiranj();
             globals.dataLoaded = true;
-            print("KONČNI PODATKI:");
+            print("PODATKI:");
             print("Uporabnik: ${globals.currentUser.toString()}");
-            print(
-                "Uporabnik-pravice: ${globals.currentUser.pravica.toString()}");
+            print("Uporabnik-pravice: ${globals.currentUser.pravica.toString()}");
             print("Avtokampi: ${globals.avtokampi.toString()}");
             print("Ceniki: ${globals.ceniki.toString()}");
             print("Drzave: ${globals.drzave.toString()}");
