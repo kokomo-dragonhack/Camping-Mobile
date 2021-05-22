@@ -6,7 +6,10 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" width="14%"/>
 </p>
 
-This is a mobile camping app written in Flutter and Dart for a school term paper/seminar assignment.
+This is a mobile camping app written in Flutter and Dart.
+
+| Mobile app video               | https://youtu.be/k0_4XvFMspk              |
+| ------------------------------ |:-----------------------------------------:|
 
 Table of contents
 =================
@@ -20,8 +23,7 @@ Table of contents
 
 ## Prerequisites
 
-To properly run the application from Android Studio (or Visual Studio code) you have to install the
-following:
+To properly run the application from Android Studio (or Visual Studio code) you have to install the following:
 
 - [Android Studio](https://developer.android.com/studio/install)
 - [Flutter and Dart](https://flutter.dev/docs/get-started/install)
@@ -33,11 +35,11 @@ If there are some problems with running the app you should check if every instal
 You can do that by running `flutter doctor`. If the problem persists try running `flutter clean`. 
 To generate an apk by yourself run `flutter build apk` and for ipa file `flutter build ios` (works only on Mac with Xcode).
 
-## Installation and running the APK/IPA
+## Installation and running the APK
 
 Building of the artifacts is handled by two Github Action workflows - one for Android and one for iOS. 
-To install the app directly to your Android mobile  device or Iphone go to repository releases and 
-download the latest (pre)release APK/IPA file and then  install it on your mobile phone (if the apk 
+To install the app directly to your Android mobile device go to repository releases and 
+download the latest (pre)release APK file and then install it on your mobile phone (if the apk 
 installation fails switch to airplane mode and then try installing it again).
 
 ## Purpose of the app
