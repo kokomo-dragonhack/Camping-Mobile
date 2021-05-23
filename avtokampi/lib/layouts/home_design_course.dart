@@ -9,34 +9,34 @@ import 'package:flutter/material.dart';
 
 import '../layouts/app_theme.dart';
 
-class DesignCourseHomeScreen extends StatefulWidget {
+class CampInfoHomeScreen extends StatefulWidget {
     final Avtokamp avtokamp;
     final CampListData campListData;
     final int kategorija = 1;
 
-    const DesignCourseHomeScreen({Key key, this.avtokamp, this.campListData})
+    const CampInfoHomeScreen({Key key, this.avtokamp, this.campListData})
         : super(key: key);
 
     @override
-    _DesignCourseHomeScreenState createState() =>
-        _DesignCourseHomeScreenState(
+    _CampInfoHomeScreenState createState() =>
+        _CampInfoHomeScreenState(
             CategoryType.osnovna, avtokamp, campListData, kategorija);
 }
 
-class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
+class _CampInfoHomeScreenState extends State<CampInfoHomeScreen> {
     CategoryType categoryType;
     int category;
     Avtokamp kamp;
     CampListData campListData;
 
 
-    _DesignCourseHomeScreenState(this.categoryType, this.kamp,
+    _CampInfoHomeScreenState(this.categoryType, this.kamp,
         this.campListData, this.category);
 
     @override
     Widget build(BuildContext context) {
         return Container(
-            color: DesignCourseAppTheme.nearlyWhite,
+            color: CampInfoAppTheme.nearlyWhite,
             child: Scaffold(
                 backgroundColor: Colors.transparent,
                 body: Column(
@@ -88,7 +88,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                             fontWeight: FontWeight.w600,
                             fontSize: 22,
                             letterSpacing: 0.27,
-                            color: DesignCourseAppTheme.darkerText,
+                            color: CampInfoAppTheme.darkerText,
                         ),
                     ),
                 ),
@@ -145,7 +145,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                             fontWeight: FontWeight.w600,
                             fontSize: 22,
                             letterSpacing: 0.27,
-                            color: DesignCourseAppTheme.darkerText,
+                            color: CampInfoAppTheme.darkerText,
                         ),
                     ),
                     Flexible(
@@ -185,10 +185,10 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             child: Container(
                 decoration: BoxDecoration(
                     color: isSelected
-                        ? DesignCourseAppTheme.nearlyBlue
-                        : DesignCourseAppTheme.nearlyWhite,
+                        ? CampInfoAppTheme.nearlyBlue
+                        : CampInfoAppTheme.nearlyWhite,
                     borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-                    border: Border.all(color: DesignCourseAppTheme.nearlyBlue)),
+                    border: Border.all(color: CampInfoAppTheme.nearlyBlue)),
                 child: Material(
                     color: Colors.transparent,
                     child: InkWell(
@@ -214,8 +214,8 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                                         fontSize: 12,
                                         letterSpacing: 0.27,
                                         color: isSelected
-                                            ? DesignCourseAppTheme.nearlyWhite
-                                            : DesignCourseAppTheme.nearlyBlue,
+                                            ? CampInfoAppTheme.nearlyWhite
+                                            : CampInfoAppTheme.nearlyBlue,
                                     ),
                                 ),
                             ),
@@ -263,7 +263,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                                                         fontWeight: FontWeight
                                                             .bold,
                                                         fontSize: 16,
-                                                        color: DesignCourseAppTheme
+                                                        color: CampInfoAppTheme
                                                             .nearlyBlue,
                                                     ),
                                                     keyboardType: TextInputType
@@ -328,7 +328,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14,
                                         letterSpacing: 0.2,
-                                        color: DesignCourseAppTheme.grey,
+                                        color: CampInfoAppTheme.grey,
                                     ),
                                 ),
                                 Text(
@@ -338,7 +338,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 22,
                                         letterSpacing: 0.27,
-                                        color: DesignCourseAppTheme.darkerText,
+                                        color: CampInfoAppTheme.darkerText,
                                     ),
                                 ),
                             ],

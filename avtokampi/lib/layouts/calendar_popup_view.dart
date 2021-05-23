@@ -82,7 +82,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                         padding: const EdgeInsets.all(24.0),
                                         child: Container(
                                             decoration: BoxDecoration(
-                                                color: HotelAppTheme
+                                                color: CampAppTheme
                                                     .buildLightTheme()
                                                     .backgroundColor,
                                                 borderRadius:
@@ -158,7 +158,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                                                 Container(
                                                                     height: 74,
                                                                     width: 1,
-                                                                    color: HotelAppTheme
+                                                                    color: CampAppTheme
                                                                         .buildLightTheme()
                                                                         .dividerColor,
                                                                 ),
@@ -237,7 +237,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                                             child: Container(
                                                                 height: 48,
                                                                 decoration: BoxDecoration(
-                                                                    color: HotelAppTheme
+                                                                    color: CampAppTheme
                                                                         .buildLightTheme()
                                                                         .primaryColor,
                                                                     borderRadius: const BorderRadius

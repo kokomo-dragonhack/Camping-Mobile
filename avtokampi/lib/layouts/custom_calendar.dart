@@ -85,7 +85,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                             const BorderRadius.all(
                                                 Radius.circular(24.0)),
                                             border: Border.all(
-                                                color: HotelAppTheme
+                                                color: CampAppTheme
                                                     .buildLightTheme()
                                                     .dividerColor,
                                             ),
@@ -138,7 +138,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                             const BorderRadius.all(
                                                 Radius.circular(24.0)),
                                             border: Border.all(
-                                                color: HotelAppTheme
+                                                color: CampAppTheme
                                                     .buildLightTheme()
                                                     .dividerColor,
                                             ),
@@ -202,7 +202,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: HotelAppTheme
+                                color: CampAppTheme
                                     .buildLightTheme()
                                     .primaryColor),
                         ),
@@ -249,7 +249,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                                                 date) ||
                                                                 getIsInRange(
                                                                     date)
-                                                                ? HotelAppTheme
+                                                                ? CampAppTheme
                                                                 .buildLightTheme()
                                                                 .primaryColor
                                                                 .withOpacity(
@@ -388,7 +388,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                                         decoration: BoxDecoration(
                                                             color: getIsItStartAndEndDate(
                                                                 date)
-                                                                ? HotelAppTheme
+                                                                ? CampAppTheme
                                                                 .buildLightTheme()
                                                                 .primaryColor
                                                                 : Colors
@@ -480,7 +480,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                                             .year == date.year
                                                         ? getIsInRange(date)
                                                         ? Colors.white
-                                                        : HotelAppTheme
+                                                        : CampAppTheme
                                                         .buildLightTheme()
                                                         .primaryColor
                                                         : Colors.transparent,

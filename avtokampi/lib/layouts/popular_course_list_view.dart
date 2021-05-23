@@ -1,7 +1,7 @@
 import 'package:avtokampi/layouts/app_theme.dart';
 import 'package:avtokampi/layouts/camp_list_data.dart';
 import 'package:avtokampi/layouts/category_camping_space.dart';
-import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
+import 'package:avtokampi/layouts/camp_info_screen.dart';
 import 'package:avtokampi/main.dart';
 import 'package:avtokampi/models/Avtokamp.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +154,7 @@ class CategoryView extends StatelessWidget {
                                                                         .circular(
                                                                         16.0)),
                                                                 // border: new Border.all(
-                                                                //     color: DesignCourseAppTheme.notWhite),
+                                                                //     color: CampInfoAppTheme.notWhite),
                                                             ),
                                                             child: Column(
                                                                 children: <
@@ -180,7 +180,7 @@ class CategoryView extends StatelessWidget {
                                                                                                     .w600,
                                                                                                 fontSize: 16,
                                                                                                 letterSpacing: 0.27,
-                                                                                                color: DesignCourseAppTheme
+                                                                                                color: CampInfoAppTheme
                                                                                                     .darkerText,
                                                                                             ),
                                                                                         ),
@@ -211,7 +211,7 @@ class CategoryView extends StatelessWidget {
                                                                                                             .w200,
                                                                                                         fontSize: 12,
                                                                                                         letterSpacing: 0.27,
-                                                                                                        color: DesignCourseAppTheme
+                                                                                                        color: CampInfoAppTheme
                                                                                                             .grey,
                                                                                                     ),
                                                                                                 ),
@@ -249,7 +249,7 @@ class CategoryView extends StatelessWidget {
                                                                 16.0)),
                                                         boxShadow: <BoxShadow>[
                                                             BoxShadow(
-                                                                color: DesignCourseAppTheme
+                                                                color: CampInfoAppTheme
                                                                     .grey
                                                                     .withOpacity(
                                                                     0.2),

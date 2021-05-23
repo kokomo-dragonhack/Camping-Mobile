@@ -13,12 +13,12 @@ import 'package:intl/intl.dart';
 import 'camp_list_app_theme.dart';
 import 'filters_screen.dart';
 
-class HotelHomeScreen extends StatefulWidget {
+class CampHomeScreen extends StatefulWidget {
     @override
-    _HotelHomeScreenState createState() => _HotelHomeScreenState();
+    _CampHomeScreenState createState() => _CampHomeScreenState();
 }
 
-class _HotelHomeScreenState extends State<HotelHomeScreen>
+class _CampHomeScreenState extends State<CampHomeScreen>
     with TickerProviderStateMixin {
     AnimationController animationController;
     List<CampListData> campList = [];
@@ -119,7 +119,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     @override
     Widget build(BuildContext context) {
         return Theme(
-            data: HotelAppTheme.buildLightTheme(),
+            data: CampAppTheme.buildLightTheme(),
             child: Container(
                 child: Scaffold(
                     body: Stack(
@@ -169,7 +169,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                 },
                                                 body: Container(
                                                     color:
-                                                    HotelAppTheme
+                                                    CampAppTheme
                                                         .buildLightTheme()
                                                         .backgroundColor,
                                                     child: ListView.builder(
@@ -208,9 +208,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                             return filter ==
                                                                 null ||
                                                                 filter == ""
-                                                                ? HotelListView(
+                                                                ? CampListView(
                                                                 callback: () {},
-                                                                hotelData: campList[index],
+                                                                campData: campList[index],
                                                                 animation: animation,
                                                                 animationController: animationController,
                                                             )
@@ -218,9 +218,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                                 .titleTxt
                                                                 .contains(
                                                                 filter)
-                                                                ? HotelListView(
+                                                                ? CampListView(
                                                                 callback: () {},
-                                                                hotelData: campList[index],
+                                                                campData: campList[index],
                                                                 animation: animation,
                                                                 animationController: animationController,
                                                             )
@@ -243,7 +243,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     Widget getListUI() {
         return Container(
             decoration: BoxDecoration(
-                color: HotelAppTheme
+                color: CampAppTheme
                     .buildLightTheme()
                     .backgroundColor,
                 boxShadow: <BoxShadow>[
@@ -288,9 +288,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                             .fastOutSlowIn)));
                                             animationController.forward();
 
-                                            return HotelListView(
+                                            return CampListView(
                                                 callback: () {},
-                                                hotelData: campList[index],
+                                                campData: campList[index],
                                                 animation: animation,
                                                 animationController: animationController,
                                             );
@@ -305,8 +305,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         );
     }
 
-    Widget getHotelViewList() {
-        final List<Widget> hotelListViews = <Widget>[];
+    Widget getCampViewList() {
+        final List<Widget> campListViews = <Widget>[];
         for (int i = 0; i < campList.length; i++) {
             final int count = campList.length;
             final Animation<double> animation =
@@ -317,10 +317,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                         (1 / count) * i, 1.0, curve: Curves.fastOutSlowIn),
                 ),
             );
-            hotelListViews.add(
-                HotelListView(
+            campListViews.add(
+                CampListView(
                     callback: () {},
-                    hotelData: campList[i],
+                    campData: campList[i],
                     animation: animation,
                     animationController: animationController,
                 ),
@@ -328,7 +328,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         }
         animationController.forward();
         return Column(
-            children: hotelListViews,
+            children: campListViews,
         );
     }
 
@@ -488,7 +488,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                 right: 16, top: 8, bottom: 8),
                             child: Container(
                                 decoration: BoxDecoration(
-                                    color: HotelAppTheme
+                                    color: CampAppTheme
                                         .buildLightTheme()
                                         .backgroundColor,
                                     borderRadius: const BorderRadius.all(
@@ -513,7 +513,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                         style: const TextStyle(
                                             fontSize: 18,
                                         ),
-                                        cursorColor: HotelAppTheme
+                                        cursorColor: CampAppTheme
                                             .buildLightTheme()
                                             .primaryColor,
                                         decoration: InputDecoration(
@@ -527,7 +527,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                     ),
                     Container(
                         decoration: BoxDecoration(
-                            color: HotelAppTheme
+                            color: CampAppTheme
                                 .buildLightTheme()
                                 .primaryColor,
                             borderRadius: const BorderRadius.all(
@@ -554,7 +554,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                     padding: const EdgeInsets.all(16.0),
                                     child: Icon(FontAwesomeIcons.search,
                                         size: 20,
-                                        color: HotelAppTheme
+                                        color: CampAppTheme
                                             .buildLightTheme()
                                             .backgroundColor),
                                 ),
@@ -576,7 +576,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                     child: Container(
                         height: 24,
                         decoration: BoxDecoration(
-                            color: HotelAppTheme
+                            color: CampAppTheme
                                 .buildLightTheme()
                                 .backgroundColor,
                             boxShadow: <BoxShadow>[
@@ -589,7 +589,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                     ),
                 ),
                 Container(
-                    color: HotelAppTheme
+                    color: CampAppTheme
                         .buildLightTheme()
                         .backgroundColor,
                     child: Padding(
@@ -651,7 +651,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                         padding: const EdgeInsets
                                                             .all(8.0),
                                                         child: Icon(Icons.sort,
-                                                            color: HotelAppTheme
+                                                            color: CampAppTheme
                                                                 .buildLightTheme()
                                                                 .primaryColor),
                                                     ),
@@ -702,7 +702,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     Widget getAppBarUI() {
         return Container(
             decoration: BoxDecoration(
-                color: HotelAppTheme
+                color: CampAppTheme
                     .buildLightTheme()
                     .backgroundColor,
                 boxShadow: <BoxShadow>[

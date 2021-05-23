@@ -55,13 +55,13 @@ class _ReservationFormState extends State<ReservationForm> {
     KampirnoMesto izbranoKampirnoMesto = getKampirnaMestaZaKampStaticna(
         globals.avtokampi[0])[0];
     VrstaKampiranja izbranaVrstaKampiranja = globals.vrsteKampiranj[0];
-    String izbraniDatumOd = "2019-12-28T17:17:16.058Z";
-    String izbraniDatumDo = "2019-12-30T17:17:16.058Z";
+    String izbraniDatumOd = "2021-5-20T17:17:16.058Z";
+    String izbraniDatumDo = "2021-5-30T17:17:16.058Z";
     int trenutniUporabnik = globals.currentUser.id;
     TextEditingController txt1 = TextEditingController(
-        text: "2019-12-28T17:17:16.058Z");
+        text: "2021-5-20T17:17:16.058Z");
     TextEditingController txt2 = TextEditingController(
-        text: "2019-12-30T17:17:16.058Z");
+        text: "2021-5-30T17:17:16.058Z");
 
     List<KampirnoMesto> getKampirnaMestaZaKamp(Avtokamp kamp) {
         List<KampirnoMesto> kampirnaMesta = [];
@@ -208,7 +208,7 @@ class _ReservationFormState extends State<ReservationForm> {
                                 decoration: const InputDecoration(
                                     icon: const Icon(Icons.date_range),
                                     hintText: 'Datum konca kampiranja',
-                                    labelText: 'Datum začetka kampiranja',
+                                    labelText: 'Datum konca kampiranja',
                                 ),
                             ),
                             new Text(""),
@@ -227,7 +227,7 @@ class _ReservationFormState extends State<ReservationForm> {
                                         initialLastDate: (new DateTime.now())
                                             .add(new Duration(days: 7)),
                                         firstDate: new DateTime(2015),
-                                        lastDate: new DateTime(2021)
+                                        lastDate: new DateTime(2022)
                                     );
                                     if (picked != null) {
                                         setState(() {

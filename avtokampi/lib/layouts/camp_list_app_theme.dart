@@ -1,7 +1,7 @@
 import 'package:avtokampi/main.dart';
 import 'package:flutter/material.dart';
 
-class HotelAppTheme {
+class CampAppTheme {
     static TextTheme _buildTextTheme(TextTheme base) {
         const String fontName = 'WorkSans';
         return base.copyWith(

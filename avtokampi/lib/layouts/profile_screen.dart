@@ -6,12 +6,12 @@ import '../layouts/profile_theme.dart';
 import 'bottom_bar_view.dart';
 import 'camp_stats_screen.dart';
 
-class FitnessAppHomeScreen extends StatefulWidget {
+class AppProfileHomeScreen extends StatefulWidget {
     @override
-    _FitnessAppHomeScreenState createState() => _FitnessAppHomeScreenState();
+    _AppProfileHomeScreenState createState() => _AppProfileHomeScreenState();
 }
 
-class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
+class _AppProfileHomeScreenState extends State<AppProfileHomeScreen>
     with TickerProviderStateMixin {
     AnimationController animationController;
 

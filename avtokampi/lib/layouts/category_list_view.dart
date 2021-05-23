@@ -194,7 +194,7 @@ class CategoryView extends StatelessWidget {
                                                                                                     .w600,
                                                                                                 fontSize: 16,
                                                                                                 letterSpacing: 0.27,
-                                                                                                color: DesignCourseAppTheme
+                                                                                                color: CampInfoAppTheme
                                                                                                     .darkerText,
                                                                                             ),
                                                                                         ),
@@ -226,7 +226,7 @@ class CategoryView extends StatelessWidget {
                                                                                                             .w200,
                                                                                                         fontSize: 12,
                                                                                                         letterSpacing: 0.27,
-                                                                                                        color: DesignCourseAppTheme
+                                                                                                        color: CampInfoAppTheme
                                                                                                             .grey,
                                                                                                     ),
                                                                                                 ),
@@ -249,7 +249,7 @@ class CategoryView extends StatelessWidget {
                                                                                                                     fontSize: 18,
                                                                                                                     letterSpacing: 0.27,
                                                                                                                     color:
-                                                                                                                    DesignCourseAppTheme
+                                                                                                                    CampInfoAppTheme
                                                                                                                         .grey,
                                                                                                                 ),
                                                                                                             ),
@@ -257,7 +257,7 @@ class CategoryView extends StatelessWidget {
                                                                                                                 Icons
                                                                                                                     .star,
                                                                                                                 color:
-                                                                                                                DesignCourseAppTheme
+                                                                                                                CampInfoAppTheme
                                                                                                                     .nearlyBlue,
                                                                                                                 size: 20,
                                                                                                             ),
@@ -291,13 +291,13 @@ class CategoryView extends StatelessWidget {
                                                                                                             .w600,
                                                                                                         fontSize: 18,
                                                                                                         letterSpacing: 0.27,
-                                                                                                        color: DesignCourseAppTheme
+                                                                                                        color: CampInfoAppTheme
                                                                                                             .nearlyBlue,
                                                                                                     ),
                                                                                                 ),
                                                                                                 Container(
                                                                                                     decoration: BoxDecoration(
-                                                                                                        color: DesignCourseAppTheme
+                                                                                                        color: CampInfoAppTheme
                                                                                                             .nearlyBlue,
                                                                                                         borderRadius:
                                                                                                         const BorderRadius
@@ -315,7 +315,7 @@ class CategoryView extends StatelessWidget {
                                                                                                             Icons
                                                                                                                 .add,
                                                                                                             color:
-                                                                                                            DesignCourseAppTheme
+                                                                                                            CampInfoAppTheme
                                                                                                                 .nearlyWhite,
                                                                                                         ),
                                                                                                     ),

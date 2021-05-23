@@ -23,7 +23,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     @override
     Widget build(BuildContext context) {
         return Container(
-            color: HotelAppTheme
+            color: CampAppTheme
                 .buildLightTheme()
                 .backgroundColor,
             child: Scaffold(
@@ -61,7 +61,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                             child: Container(
                                 height: 48,
                                 decoration: BoxDecoration(
-                                    color: HotelAppTheme
+                                    color: CampAppTheme
                                         .buildLightTheme()
                                         .primaryColor,
                                     borderRadius: const BorderRadius.all(
@@ -164,7 +164,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                                     ),
                                     CupertinoSwitch(
                                         activeColor: date.isSelected
-                                            ? HotelAppTheme
+                                            ? CampAppTheme
                                             .buildLightTheme()
                                             .primaryColor
                                             : Colors.grey.withOpacity(0.6),
@@ -324,7 +324,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                                                             : Icons
                                                             .check_box_outline_blank,
                                                         color: date.isSelected
-                                                            ? HotelAppTheme
+                                                            ? CampAppTheme
                                                             .buildLightTheme()
                                                             .primaryColor
                                                             : Colors.grey
@@ -394,7 +394,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     Widget getAppBarUI() {
         return Container(
             decoration: BoxDecoration(
-                color: HotelAppTheme
+                color: CampAppTheme
                     .buildLightTheme()
                     .backgroundColor,
                 boxShadow: <BoxShadow>[

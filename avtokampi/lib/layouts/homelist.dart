@@ -2,7 +2,7 @@ import 'package:avtokampi/layouts/add_camp_form.dart';
 import 'package:avtokampi/layouts/camp_admins_list.dart';
 import 'package:avtokampi/layouts/camp_reservation_form.dart';
 import 'package:avtokampi/layouts/camps_map.dart';
-import 'package:avtokampi/layouts/hotel_home_screen.dart';
+import 'package:avtokampi/layouts/camp_home_screen.dart';
 import 'package:avtokampi/layouts/kampi_web_view.dart';
 import 'package:avtokampi/layouts/opinions_list.dart';
 import 'package:avtokampi/layouts/profile_screen.dart';
@@ -20,7 +20,7 @@ class HomeList {
     static List<HomeList> homeList = [
         HomeList(
             imagePath: 'assets/images/kampi_ikona.png',
-            navigateScreen: HotelHomeScreen(),
+            navigateScreen: CampHomeScreen(),
         ),
         HomeList(
             imagePath: 'assets/images/rezerviraj_ikona.png',
@@ -36,7 +36,7 @@ class HomeList {
         ),
         HomeList(
             imagePath: 'assets/images/user_ikona.png',
-            navigateScreen: FitnessAppHomeScreen(),
+            navigateScreen: AppProfileHomeScreen(),
         ),
         HomeList(
             imagePath: 'assets/images/web.png',

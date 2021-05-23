@@ -76,7 +76,7 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                             values: _values,
                             min: 0.0,
                             max: 1000.0,
-                            activeColor: HotelAppTheme
+                            activeColor: CampAppTheme
                                 .buildLightTheme()
                                 .primaryColor,
                             inactiveColor: Colors.grey.withOpacity(0.4),

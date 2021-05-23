@@ -1,6 +1,6 @@
 import 'package:avtokampi/globals.dart' as globals;
 import 'package:avtokampi/layouts/camp_list_app_theme.dart';
-import 'package:avtokampi/layouts/course_info_screen_kampi.dart';
+import 'package:avtokampi/layouts/camp_info_screen.dart';
 import 'package:avtokampi/models/Mnenje.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,16 +9,16 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import 'camp_list_data.dart';
 
-class HotelListView extends StatelessWidget {
-    const HotelListView({Key key,
-        this.hotelData,
+class CampListView extends StatelessWidget {
+    const CampListView({Key key,
+        this.campData,
         this.animationController,
         this.animation,
         this.callback})
         : super(key: key);
 
     final VoidCallback callback;
-    final CampListData hotelData;
+    final CampListData campData;
     final AnimationController animationController;
     final Animation<dynamic> animation;
 
@@ -177,7 +177,7 @@ class HotelListView extends StatelessWidget {
             context,
             MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) =>
-                    CourseInfoScreen(hotelData, hotelData.avtokamp),
+                    CourseInfoScreen(campData, campData.avtokamp),
             ),
         );
     }
@@ -202,7 +202,7 @@ class HotelListView extends StatelessWidget {
                                     moveTo(context);
                                 },
                                 onLongPress: () {
-                                    showMnenja(context, hotelData);
+                                    showMnenja(context, campData);
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
@@ -227,14 +227,14 @@ class HotelListView extends StatelessWidget {
                                                         AspectRatio(
                                                             aspectRatio: 2,
                                                             child: Image.memory(
-                                                                hotelData
+                                                                campData
                                                                     .imagePath,
                                                                 fit: BoxFit
                                                                     .cover,
                                                             ),
                                                         ),
                                                         Container(
-                                                            color: HotelAppTheme
+                                                            color: CampAppTheme
                                                                 .buildLightTheme()
                                                                 .backgroundColor,
                                                             child: Row(
@@ -262,7 +262,7 @@ class HotelListView extends StatelessWidget {
                                                                                     children: <
                                                                                         Widget>[
                                                                                         Text(
-                                                                                            hotelData
+                                                                                            campData
                                                                                                 .titleTxt,
                                                                                             textAlign: TextAlign
                                                                                                 .left,
@@ -282,7 +282,7 @@ class HotelListView extends StatelessWidget {
                                                                                             children: <
                                                                                                 Widget>[
                                                                                                 Text(
-                                                                                                    hotelData
+                                                                                                    campData
                                                                                                         .subTxt,
                                                                                                     style: TextStyle(
                                                                                                         fontSize: 14,
@@ -298,13 +298,13 @@ class HotelListView extends StatelessWidget {
                                                                                                     FontAwesomeIcons
                                                                                                         .mapMarkerAlt,
                                                                                                     size: 12,
-                                                                                                    color: HotelAppTheme
+                                                                                                    color: CampAppTheme
                                                                                                         .buildLightTheme()
                                                                                                         .primaryColor,
                                                                                                 ),
                                                                                                 Expanded(
                                                                                                     child: Text(
-                                                                                                        '${hotelData
+                                                                                                        '${campData
                                                                                                             .dist}',
                                                                                                         overflow:
                                                                                                         TextOverflow
@@ -330,18 +330,18 @@ class HotelListView extends StatelessWidget {
                                                                                                         allowHalfRating: true,
                                                                                                         spacing: 1,
                                                                                                         starCount: 5,
-                                                                                                        rating: hotelData
+                                                                                                        rating: campData
                                                                                                             .rating,
                                                                                                         size: 20,
-                                                                                                        color: HotelAppTheme
+                                                                                                        color: CampAppTheme
                                                                                                             .buildLightTheme()
                                                                                                             .primaryColor,
-                                                                                                        borderColor: HotelAppTheme
+                                                                                                        borderColor: CampAppTheme
                                                                                                             .buildLightTheme()
                                                                                                             .primaryColor,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                        '   Mnenj: ${hotelData
+                                                                                                        '   Mnenj: ${campData
                                                                                                             .reviews
                                                                                                             .toString()}',
                                                                                                         style: TextStyle(
@@ -374,7 +374,7 @@ class HotelListView extends StatelessWidget {
                                                                             children: <
                                                                                 Widget>[
                                                                                 Text(
-                                                                                    '\€${hotelData
+                                                                                    '\€${campData
                                                                                         .perNight}',
                                                                                     textAlign: TextAlign
                                                                                         .left,
@@ -417,7 +417,7 @@ class HotelListView extends StatelessWidget {
                                                             onTap: () {
                                                                 _ackAlert2(
                                                                     context,
-                                                                    hotelData);
+                                                                    campData);
                                                             },
                                                             child: Padding(
                                                                 padding: const EdgeInsets
@@ -425,7 +425,7 @@ class HotelListView extends StatelessWidget {
                                                                 child: Icon(
                                                                     Icons
                                                                         .favorite_border,
-                                                                    color: HotelAppTheme
+                                                                    color: CampAppTheme
                                                                         .buildLightTheme()
                                                                         .primaryColor,
                                                                 ),
